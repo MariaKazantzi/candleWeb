@@ -5,12 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Website</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Header styles */
+        header {
+            background-color: #333;
+            padding: 20px;
+            color: #fff;
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Vertically align items in the header */
+            position: relative; /* Needed for absolute positioning of the logo */
+        }
+
+        /* Logo styles */
+        .logo {
+            max-width: 100px; /* Keep your desired max width */
+            height: auto; /* Maintain aspect ratio */
+            position: absolute; /* Position the logo absolutely within the header */
+            top: 50%; /* Start at the vertical center of the header */
+            left: 20px; /* Distance from the left edge of the header */
+            transform: translateY(-50%); /* Adjust to truly center vertically */
+        }
+
+        /* Add margin to content if it's not the logo, to prevent overlap */
+        /* For example, if you have navigation links, you'd add margin to them */
+        nav { /* Assuming you might add a nav element later */
+            margin-left: 150px; /* Adjust this value based on your logo's width + desired spacing */
+        }
+
+        body {
+            font-family: 'Puddy Gum', cursive, sans-serif; /* Use your custom font name first, then fallbacks */
+            background-color: lightpink; /* Your existing body style */
+            display: flex; /* Your existing body style */
+            align-items: center; /* Your existing body style */
+            justify-content: center; /* Your existing body style */
+            min-height: 100vh; /* Changed from h-screen to min-height: 100vh for better flexibility */
+            margin: 0; /* Remove default body margin */
+        }
+
+        .shop-button {
+            display: inline-flex; /* Allows text and arrow to be on the same line */
+            align-items: center; /* Vertically centers text and arrow */
+            background-color: #ff69b4; /* Pink color */
+            color: #fff; /* White text color */
+            font-weight: bold; /* Bold text */
+            padding: 12px 25px; /* Padding inside the button */
+            border-radius: 8px; /* Slightly rounded corners */
+            text-decoration: none; /* Remove underline from link */
+            transition: background-color 0.3s ease; /* Smooth hover effect */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            cursor: pointer; /* Indicate it's clickable */
+            border: none; /* Remove default button border */
+            font-size: 1.1rem; /* Slightly larger font size */
+        }
+
+        .shop-button:hover {
+            background-color: #e65a9e; /* Darker pink on hover */
+        }
+
+        .shop-button .arrow {
+            margin-left: 10px; /* Space between text and arrow */
+            font-size: 1.3em; /* Make arrow slightly larger */
+            line-height: 1; /* Align arrow vertically */
+            transition: transform 0.3s ease; /* Smooth arrow movement on hover */
+        }
+
+        .shop-button:hover .arrow {
+            transform: translateX(5px); /* Move arrow slightly to the right on hover */
+        }
+    </style>
+    
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
+<body class="bg-gray-100 flex items-center justify-center h-screen" style="background-color: lightpink;">
+
+    <img src="pictures\logo.png" alt="Your Company Logo" class="logo" style="position: absolute; top: 80px; left: 20px; max-width: 80px; height: auto;">
+    
+
     <div class="text-center p-6 bg-white rounded-lg shadow-lg">
-        <h1 class="text-3xl font-bold text-gray-800 mb-4">Welcome to My Website!</h1>
-        <p class="text-gray-600 mb-6">This is a small piece of text to get you started.</p>
-        <img src="https://via.placeholder.com/400" alt="Placeholder Image" class="mx-auto rounded-lg shadow-md">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">Welcome to Simply Scented!</h1>
+        <p class="text-gray-600 mb-6"> I'm so glad you're here to discover my handcrafted candles.</p>
+        <a href="shop.html" class="shop-button">
+            Shop now <span class="arrow">&rarr;</span>
+        </a>
     </div>
 </body>
 </html>
