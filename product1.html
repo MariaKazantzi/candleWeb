@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Our Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Fallback font */
+            background-color: lightpink; /* Your desired background color */
+        }
+
+        /* Header styles - using flexbox for better layout control */
+        .main-header {
+            background-color: #333; /* Dark header background */
+            padding: 1.25rem 2rem; /* py-5 px-8 */
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Space out logo and title */
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            margin-bottom: 2.5rem; /* mb-10 */
+        }
+
+        /* Logo styles */
+        .logo {
+            max-width: 80px; /* Your desired max width */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 1.5rem; /* Space between logo and title */
+        }
+
+        /* Shop title and description within the header */
+        .header-content {
+            flex-grow: 1; /* Allow content to take available space */
+            text-align: center; /* Center text within its flex item */
+        }
+
+        /* Specific styles for the product image gallery */
+        .main-product-image {
+            width: 100%;
+            height: 400px; /* Fixed height for consistency, adjust as needed */
+            object-fit: contain; /* Ensures the whole image is visible */
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* subtle shadow */
+        }
+
+        .thumbnail-image {
+            width: 100px; /* Fixed width for thumbnails */
+            height: 100px; /* Fixed height for thumbnails */
+            object-fit: cover; /* Cover the area, cropping if necessary */
+            border-radius: 0.5rem; /* rounded-lg */
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out, border 0.2s ease-in-out;
+            border: 2px solid transparent; /* Default transparent border */
+        }
+
+        .thumbnail-image:hover {
+            transform: translateY(-3px); /* Slight lift on hover */
+            border-color: #6366f1; /* Border on hover */
+        }
+
+        .thumbnail-image.active {
+            border-color: #6366f1; /* Active state border */
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5); /* Blue glow for active */
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+    <header class="main-header">
+        <a href="index.html"> <img src="pictures/logo.png" alt="Your Company Logo" class="logo">
+        </a>
+        <div class="header-content">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-2">Product Details</h1>
+            <p class="text-lg text-gray-300">Everything you need to know about this candle!</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <div class="product-image-gallery">
+            <img id="mainImage" src="pictures/candle1a.jpg" alt="Main Product Image" class="main-product-image mb-4">
+
+            <div class="flex flex-wrap gap-3 justify-center">
+                <img src="pictures/candle1a.jpg" alt="Product Thumbnail 1" class="thumbnail-image active" onclick="changeMainImage(this)">
+                <img src="pictures/candle1b.jpg" alt="Product Thumbnail 2" class="thumbnail-image" onclick="changeMainImage(this)">
+                <img src="pictures/product-thumb3.jpg" alt="Product Thumbnail 3" class="thumbnail-image" onclick="changeMainImage(this)">
+                <img src="pictures/product-thumb4.jpg" alt="Product Thumbnail 4" class="thumbnail-image" onclick="changeMainImage(this)">
+            </div>
+        </div>
+
+        <div class="product-details">
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-3">Sexy Lavender</h2>
+            <p class="text-gray-600 text-xl mb-4">A cutting-edge device designed for ultimate performance and style.</p>
+
+            <div class="flex items-baseline mb-6">
+                <span class="text-5xl font-extrabold text-indigo-700 mr-2">4€</span>
+                <span class="text-gray-500 line-through text-lg">6€</span> </div>
+
+            <h3 class="text-2xl font-semibold text-gray-800 mb-3">Product Description</h3>
+            <p class="text-gray-700 leading-relaxed mb-6">
+                This **Stylish Gadget Pro Max** boasts an impressive array of features, from its lightning-fast processor to its stunning high-definition display. Crafted with premium materials, it offers an ergonomic design that fits perfectly in your hand. Ideal for both work and play, it's the perfect companion for anyone seeking top-tier technology and unparalleled elegance. Long-lasting battery life ensures you stay connected all day.
+            </p>
+
+            <div class="mb-6">
+                <label for="color" class="block text-gray-700 text-lg font-semibold mb-2">Color:</label>
+                <select id="color" class="block w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                    <option value="grey">Grey</option>
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="orange">Orange</option>
+                    <option value="purple">Purple</option>
+                    <option value="pink">Pink</option>
+                    <option value="brown">Brown</option>
+                </select>
+            </div>
+
+            <div class="mb-6">
+                <label for="scent" class="block text-gray-700 text-lg font-semibold mb-2">Scent:</label>
+                <select id="scent" class="block w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                    <option value="vanilla">Vanilla</option>
+                    <option value="coconut">Coconut</option>
+                    <option value="cherry">Cherry</option>
+                    <option value="lemon">Lemon</option>
+                    <option value="lavender">Lavender</option>
+                    <option value="rose">Rose</option>
+                </select>
+            </div>
+
+            <div class="mb-6">
+                <label for="quantity" class="block text-gray-700 text-lg font-semibold mb-2">Quantity:</label>
+                <input type="number" id="quantity" value="1" min="1" class="w-24 border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+            </div>
+
+            <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
+                Add to Cart
+            </button>
+        </div>
+    </main>
+
+    <script>
+        function changeMainImage(thumbnail) {
+            // Remove 'active' class from all thumbnails
+            const thumbnails = document.querySelectorAll('.thumbnail-image');
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+
+            // Add 'active' class to the clicked thumbnail
+            thumbnail.classList.add('active');
+
+            // Change the main image source
+            document.getElementById('mainImage').src = thumbnail.src;
+        }
+    </script>
+</body>
+</html>
