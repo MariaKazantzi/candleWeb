@@ -1,0 +1,30 @@
+.shop-button {
+    display: inline-flex; /* Allows text and arrow to be on the same line */
+    align-items: center; /* Vertically centers text and arrow */
+    background-color: #ff69b4; /* Pink color */
+    color: #fff; /* White text color */
+    font-weight: bold; /* Bold text */
+    padding: 12px 25px; /* Padding inside the button */
+    border-radius: 8px; /* Slightly rounded corners */
+    text-decoration: none; /* Remove underline from link */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    cursor: pointer; /* Indicate it's clickable */
+    border: none; /* Remove default button border */
+    font-size: 1.1rem; /* Slightly larger font size */
+}
+
+.shop-button:hover {
+    background-color: #e65a9e; /* Darker pink on hover */
+}
+
+.shop-button .arrow {
+    margin-left: 10px; /* Space between text and arrow */
+    font-size: 1.3em; /* Make arrow slightly larger */
+    line-height: 1; /* Align arrow vertically */
+    transition: transform 0.3s ease; /* Smooth arrow movement on hover */
+}
+
+.shop-button:hover .arrow {
+    transform: translateX(5px); /* Move arrow slightly to the right on hover */
+}

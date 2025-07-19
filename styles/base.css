@@ -1,0 +1,32 @@
+/* Custom font for a clean look - ensure 'Puddy Gum' is loaded if you want to use it */
+/* For 'Puddy Gum', you'd typically link it from Google Fonts or similar */
+/* Example: @import url('https://fonts.googleapis.com/css2?family=Puddy+Gum&display=swap'); */
+body {
+    font-family: 'Inter', sans-serif; /* Fallback to Inter, or replace with 'Puddy Gum' if loaded */
+    background-color: lightpink; /* Your desired background color */
+}
+
+/* Header styles - using flexbox for better layout control */
+.main-header {
+    background-color: #333; /* Dark header background */
+    padding: 1.25rem 2rem; /* py-5 px-8 */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out logo and title */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    margin-bottom: 2.5rem; /* mb-10 */
+}
+
+/* Logo styles */
+.logo {
+    max-width: 80px; /* Your desired max width */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 1.5rem; /* Space between logo and title */
+}
+
+/* Shop title and description within the header */
+.header-content {
+    flex-grow: 1; /* Allow content to take available space */
+    text-align: center; /* Center text within its flex item */
+}
