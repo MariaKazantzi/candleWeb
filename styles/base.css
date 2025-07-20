@@ -16,6 +16,11 @@ body {
     justify-content: space-between; /* Space out brand and navigation */
     flex-wrap: wrap; /* Allow items to wrap on smaller screens */
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Add subtle shadow */
+    position: fixed; /* Keep header fixed at top */
+    top: 0; /* Position at top of viewport */
+    left: 0; /* Align to left edge */
+    right: 0; /* Stretch to right edge */
+    z-index: 1000; /* Ensure header stays above other content */
 }
 
 /* Header brand section (logo + title) */
