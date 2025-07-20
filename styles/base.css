@@ -13,20 +13,48 @@ body {
     color: #fff;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Space out logo and title */
+    justify-content: space-between; /* Space out brand and navigation */
     flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-    margin-bottom: 2.5rem; /* mb-10 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Add subtle shadow */
+}
+
+/* Header brand section (logo + title) */
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Space between logo and title */
+}
+
+/* Header navigation - centered */
+.header-nav {
+    flex: 1; /* Take up remaining space */
+    display: flex;
+    justify-content: center; /* Center the navigation */
 }
 
 /* Logo styles */
 .logo {
-    max-width: 80px; /* Your desired max width */
+    max-width: 60px; /* Slightly smaller for nav bar */
     height: auto; /* Maintain aspect ratio */
-    margin-right: 1.5rem; /* Space between logo and title */
 }
 
-/* Shop title and description within the header */
-.header-content {
-    flex-grow: 1; /* Allow content to take available space */
-    text-align: center; /* Center text within its flex item */
+/* Header navigation */
+.header-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .header-nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
 }

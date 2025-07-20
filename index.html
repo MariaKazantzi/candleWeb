@@ -9,30 +9,45 @@
     <link rel="stylesheet" href="./styles/index.css">
     
 </head>
-<body class="p-4 sm:p-8">
+<body class="min-h-screen flex flex-col">
 
-        <!-- Main Header Section -->
+    <!-- Navigation Header -->
     <header class="main-header">
-        <!-- Logo -->
-        <img src="pictures\logo.png" alt="Your Company Logo" class="logo">
-        <!-- Note: Replace "https://placehold.co/80x80/333/fff?text=Logo" with "pictures/logo.png" if your logo is local -->
-
-        <!-- Shop Title and Description -->
-        <div class="header-content">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-2">Simply Scented</h1>
-            <p class="text-lg text-gray-300">Welcome to our website!</p>
+        <!-- Logo and Brand -->
+        <div class="header-brand">
+            <img src="pictures\logo.png" alt="Simply Scented Logo" class="logo">
+            <h1 class="text-2xl font-bold text-white">Simply Scented</h1>
         </div>
+        <!-- Navigation Menu -->
+        <nav class="header-nav">
+            <ul class="flex space-x-6 text-white text-lg">
+                <li><a href="index.html" class="hover:text-gray-300 transition duration-300">Home</a></li>
+                <li><a href="shop.html" class="hover:text-gray-300 transition duration-300">Shop</a></li>
+                <li><a href="about.html" class="hover:text-gray-300 transition duration-300">About Us</a></li>
+                <li><a href="contact.html" class="hover:text-gray-300 transition duration-300">Contact</a></li>
+            </ul>
+        </nav>
     </header>
     
-
-    <div class="text-center p-6 bg-white rounded-lg shadow-lg">
-        <h1 class="text-3xl font-bold text-gray-800 mb-4">Welcome to Simply Scented!</h1>
-        <p class="text-gray-600 mb-6"> Homemade candles from a girl based in Germany! 
-            Thanks for visiting my website. 
-            I hope you will find something you like.</p>
-        <a onclick="window.location.href='shop.html'" class="shop-button">
-            Shop now <span class="arrow">&rarr;</span>
-        </a> 
-    </div>
+    <!-- Main content container - centered horizontally and vertically -->
+    <main class="flex-1 flex items-center justify-center p-4">
+        <div class="text-center max-w-2xl w-full p-6 bg-white rounded-lg shadow-lg">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Welcome to Simply Scented!</h1>
+            <p class="text-gray-600 mb-6"> Homemade candles from a girl based in Germany! 
+                Thanks for visiting my website. 
+                I hope you will find something you like.</p>
+            <a onclick="window.location.href='shop.html'" class="shop-button">
+                Shop now <span class="arrow">&rarr;</span>
+            </a> 
+        </div>
+    </main>
+    
+    <footer class="text-center text-gray-600 p-4">
+        <p>&copy; 2025 Simply Scented. All rights reserved.</p>
+        <p>Follow us on 
+            <a href="https://www.instagram.com/simplyscented/" class="text-blue-500 hover:underline">Instagram</a> and 
+            <a href="https://www.facebook.com/simplyscented" class="text-blue-500 hover:underline">Facebook</a>.
+        </p>
+    </footer>
 </body>
 </html>
