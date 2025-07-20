@@ -13,9 +13,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Listen for cart updates
         window.addEventListener('cartUpdated', function(event) {
             cart = event.detail.cart;
-            updateCartDisplay();
             loadCheckoutItems();
             updateCheckoutTotals();
+            
+            // Check if cart is now empty
+            if (cart.length === 0 || cart.every(item => item.quantity === 0)) {
+                showEmptyCartMessage();
+            }
         });
     } else {
         console.error('Cart manager not available');
@@ -89,153 +93,7 @@ function setupEventListeners() {
         checkoutForm.addEventListener('submit', handleFormSubmission);
     }
     
-    // Cart functionality (reuse from products.js)
-    setupCartFunctionality();
-}
-
-// Setup cart functionality for the header
-function setupCartFunctionality() {
-    updateCartDisplay();
-    
-    const cartButton = document.getElementById('cartButton');
-    if (cartButton) {
-        cartButton.addEventListener('click', toggleCart);
-    }
-    
-    // Prevent cart dropdown from closing when clicking inside it
-    const cartDropdown = document.getElementById('cartDropdown');
-    if (cartDropdown) {
-        cartDropdown.addEventListener('click', function(event) {
-            event.stopPropagation();
-        });
-    }
-    
-    // Close cart dropdown when clicking outside
-    document.addEventListener('click', function(event) {
-        const cartContainer = document.querySelector('.cart-container');
-        if (cartContainer && !cartContainer.contains(event.target)) {
-            const cartDropdown = document.getElementById('cartDropdown');
-            if (cartDropdown) {
-                cartDropdown.classList.add('hidden');
-            }
-        }
-    });
-}
-
-// Update cart display in header
-function updateCartDisplay() {
-    const cartCount = document.getElementById('cartCount');
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    
-    if (!cartCount || !cartItems || !cartTotal) return;
-    
-    // Update cart count
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.textContent = totalItems;
-    cartCount.style.display = totalItems > 0 ? 'block' : 'none';
-    
-    // Update cart items
-    if (cart.length === 0) {
-        cartItems.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
-    } else {
-        cartItems.innerHTML = cart.map(item => `
-            <div class="cart-item">
-                <div class="item-info">
-                    <h4>${item.name}</h4>
-                    <p>Color: ${item.color}, Scent: ${item.scent}</p>
-                </div>
-                <div class="item-right">
-                    <div class="quantity-controls">
-                        <button data-item-id="${item.id}" data-action="decrease" class="quantity-btn" ${item.quantity === 0 ? 'disabled' : ''}>-</button>
-                        <span class="quantity-display">${item.quantity}</span>
-                        <button data-item-id="${item.id}" data-action="increase" class="quantity-btn">+</button>
-                    </div>
-                    <div class="item-price">€${(item.price * item.quantity).toFixed(2)}</div>
-                </div>
-                <button data-item-id="${item.id}" class="remove-btn">×</button>
-            </div>
-        `).join('');
-        
-        // Add event listeners to quantity control buttons
-        const quantityButtons = cartItems.querySelectorAll('.quantity-btn');
-        quantityButtons.forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.stopPropagation();
-                const itemId = parseInt(this.getAttribute('data-item-id'));
-                const action = this.getAttribute('data-action');
-                updateQuantity(itemId, action);
-            });
-        });
-        
-        // Add event listeners to remove buttons
-        const removeButtons = cartItems.querySelectorAll('.remove-btn');
-        removeButtons.forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.stopPropagation();
-                const itemId = parseInt(this.getAttribute('data-item-id'));
-                removeFromCart(itemId);
-            });
-        });
-    }
-    
-    // Update total
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotal.textContent = `Total: €${total.toFixed(2)}`;
-}
-
-// Update quantity function
-function updateQuantity(itemId, action) {
-    if (!window.cartManager) return;
-    
-    if (action === 'increase') {
-        window.cartManager.increaseQuantity(itemId);
-    } else if (action === 'decrease') {
-        window.cartManager.decreaseQuantity(itemId);
-    }
-    
-    cart = window.cartManager.getCart();
-    
-    const dropdown = document.getElementById('cartDropdown');
-    const wasOpen = dropdown && !dropdown.classList.contains('hidden');
-    
-    updateCartDisplay();
-    loadCheckoutItems();
-    updateCheckoutTotals();
-    
-    if (wasOpen && dropdown) {
-        dropdown.classList.remove('hidden');
-    }
-}
-
-// Remove from cart function
-function removeFromCart(itemId) {
-    cart = cart.filter(item => item.id !== itemId);
-    cartManager.updateCart(cart);
-    
-    const dropdown = document.getElementById('cartDropdown');
-    const wasOpen = dropdown && !dropdown.classList.contains('hidden');
-    
-    updateCartDisplay();
-    loadCheckoutItems();
-    updateCheckoutTotals();
-    
-    if (wasOpen && dropdown) {
-        dropdown.classList.remove('hidden');
-    }
-    
-    // Check if cart is now empty
-    if (cart.length === 0 || cart.every(item => item.quantity === 0)) {
-        showEmptyCartMessage();
-    }
-}
-
-// Toggle cart dropdown
-function toggleCart() {
-    const dropdown = document.getElementById('cartDropdown');
-    if (dropdown) {
-        dropdown.classList.toggle('hidden');
-    }
+    // Cart functionality is now handled by cart-ui.js
 }
 
 // Handle form submission
@@ -315,8 +173,10 @@ function processOrder(customerInfo) {
     
     setTimeout(() => {
         // Clear cart items that were purchased
-        cart = cart.filter(item => item.quantity === 0);
-        cartManager.updateCart(cart);
+        if (window.cartManager) {
+            window.cartManager.clearCart();
+            cart = window.cartManager.getCart();
+        }
         
         // Show success message
         alert(`Thank you for your order, ${customerInfo.firstName}! Your order #${order.id} has been confirmed. You will receive a confirmation email shortly.`);
