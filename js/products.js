@@ -1,7 +1,27 @@
 // Shopping cart functionality and product page interactions
 
-// Shopping cart data
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+// Wait for cart manager to be available and get cart reference
+let cart = [];
+
+// Initialize when DOM loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Ensure global cart manager is available
+    if (window.cartManager) {
+        cart = window.cartManager.getCart();
+        console.log('Products page loaded, cart items:', cart.length);
+        
+        // Listen for cart updates from other parts of the application
+        window.addEventListener('cartUpdated', function(event) {
+            cart = event.detail.cart;
+            updateCartDisplay();
+        });
+    } else {
+        console.error('Global cart manager not available');
+    }
+    
+    // Initialize the page
+    updateCartDisplay();
+});
 
 // Update cart display
 function updateCartDisplay() {
@@ -83,66 +103,60 @@ function addToCart() {
     const scent = document.getElementById('scent').value;
     const quantity = parseInt(document.getElementById('quantity').value);
     
-    // Check if item with same properties already exists
-    const existingItemIndex = cart.findIndex(item => 
-        item.name === 'Sexy Lavender' && 
-        item.color === color && 
-        item.scent === scent
-    );
+    // Create the item to add
+    const product = {
+        name: 'Sexy Lavender',
+        price: 4,
+        color: color,
+        scent: scent,
+        quantity: quantity
+    };
     
-    if (existingItemIndex !== -1) {
-        // Item exists, just update quantity
-        cart[existingItemIndex].quantity += quantity;
+    // Use the global cart manager to add the item
+    if (window.cartManager) {
+        window.cartManager.addItem(product);
+        cart = window.cartManager.getCart(); // Update local reference
+        updateCartDisplay();
     } else {
-        // New item, add to cart
-        const product = {
-            id: Date.now(), // Simple ID generation
-            name: 'Sexy Lavender',
-            price: 4,
-            color: color,
-            scent: scent,
-            quantity: quantity
-        };
-        cart.push(product);
+        console.error('Global cart manager not available');
     }
-    
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartDisplay();
 }
 
 // Remove from cart function
 function removeFromCart(itemId) {
-    cart = cart.filter(item => item.id !== itemId);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    // Store dropdown state before updating
-    const dropdown = document.getElementById('cartDropdown');
-    const wasOpen = dropdown && !dropdown.classList.contains('hidden');
-    
-    updateCartDisplay();
-    
-    // Keep dropdown open if it was open before
-    if (wasOpen && dropdown) {
-        dropdown.classList.remove('hidden');
+    if (window.cartManager) {
+        window.cartManager.removeItem(itemId);
+        cart = window.cartManager.getCart(); // Update local reference
+        
+        // Store dropdown state before updating
+        const dropdown = document.getElementById('cartDropdown');
+        const wasOpen = dropdown && !dropdown.classList.contains('hidden');
+        
+        updateCartDisplay();
+        
+        // Keep dropdown open if it was open before
+        if (wasOpen && dropdown) {
+            dropdown.classList.remove('hidden');
+        }
+    } else {
+        console.error('Global cart manager not available');
     }
 }
 
 // Update quantity function
 function updateQuantity(itemId, action) {
-    const itemIndex = cart.findIndex(item => item.id === itemId);
-    if (itemIndex === -1) return;
-    
-    if (action === 'increase') {
-        cart[itemIndex].quantity += 1;
-    } else if (action === 'decrease') {
-        // Only decrease if quantity is greater than 0
-        if (cart[itemIndex].quantity > 0) {
-            cart[itemIndex].quantity -= 1;
-        }
-        // Don't remove item when quantity reaches 0, just keep it at 0
+    if (!window.cartManager) {
+        console.error('Global cart manager not available');
+        return;
     }
     
-    localStorage.setItem('cart', JSON.stringify(cart));
+    if (action === 'increase') {
+        window.cartManager.increaseQuantity(itemId);
+    } else if (action === 'decrease') {
+        window.cartManager.decreaseQuantity(itemId);
+    }
+    
+    cart = window.cartManager.getCart(); // Update local reference
     
     // Store dropdown state before updating
     const dropdown = document.getElementById('cartDropdown');

@@ -1,10 +1,26 @@
 // Checkout page functionality
 
-// Get cart data from localStorage
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+// Use global cart manager
+let cart = [];
 
 // Initialize checkout page
 document.addEventListener('DOMContentLoaded', function() {
+    // Ensure cart manager is available
+    if (window.cartManager) {
+        cart = window.cartManager.getCart();
+        console.log('Checkout page loaded, cart items:', cart.length);
+        
+        // Listen for cart updates
+        window.addEventListener('cartUpdated', function(event) {
+            cart = event.detail.cart;
+            updateCartDisplay();
+            loadCheckoutItems();
+            updateCheckoutTotals();
+        });
+    } else {
+        console.error('Cart manager not available');
+    }
+    
     loadCheckoutItems();
     updateCheckoutTotals();
     setupEventListeners();
@@ -170,18 +186,15 @@ function updateCartDisplay() {
 
 // Update quantity function
 function updateQuantity(itemId, action) {
-    const itemIndex = cart.findIndex(item => item.id === itemId);
-    if (itemIndex === -1) return;
+    if (!window.cartManager) return;
     
     if (action === 'increase') {
-        cart[itemIndex].quantity += 1;
+        window.cartManager.increaseQuantity(itemId);
     } else if (action === 'decrease') {
-        if (cart[itemIndex].quantity > 0) {
-            cart[itemIndex].quantity -= 1;
-        }
+        window.cartManager.decreaseQuantity(itemId);
     }
     
-    localStorage.setItem('cart', JSON.stringify(cart));
+    cart = window.cartManager.getCart();
     
     const dropdown = document.getElementById('cartDropdown');
     const wasOpen = dropdown && !dropdown.classList.contains('hidden');
@@ -198,7 +211,7 @@ function updateQuantity(itemId, action) {
 // Remove from cart function
 function removeFromCart(itemId) {
     cart = cart.filter(item => item.id !== itemId);
-    localStorage.setItem('cart', JSON.stringify(cart));
+    cartManager.updateCart(cart);
     
     const dropdown = document.getElementById('cartDropdown');
     const wasOpen = dropdown && !dropdown.classList.contains('hidden');
@@ -303,7 +316,7 @@ function processOrder(customerInfo) {
     setTimeout(() => {
         // Clear cart items that were purchased
         cart = cart.filter(item => item.quantity === 0);
-        localStorage.setItem('cart', JSON.stringify(cart));
+        cartManager.updateCart(cart);
         
         // Show success message
         alert(`Thank you for your order, ${customerInfo.firstName}! Your order #${order.id} has been confirmed. You will receive a confirmation email shortly.`);
