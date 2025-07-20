@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/products.css">
+    <script src="../js/products.js"></script>
 </head>
 <body class="p-4 sm:p-8">
     <header class="main-header">
@@ -24,6 +25,30 @@
                 <li><a href="../contact.html" class="hover:text-gray-300 transition duration-300">Contact</a></li>
             </ul>
         </nav>
+        
+        <!-- Shopping Cart -->
+        <div class="cart-container">
+            <button id="cartButton" class="cart-button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cart-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                </svg>
+                <span id="cartCount" class="cart-count">0</span>
+            </button>
+            
+            <!-- Cart Dropdown -->
+            <div id="cartDropdown" class="cart-dropdown hidden">
+                <div class="cart-header">
+                    <h3>Shopping Cart</h3>
+                </div>
+                <div id="cartItems" class="cart-items">
+                    <p class="empty-cart">Your cart is empty</p>
+                </div>
+                <div class="cart-footer">
+                    <div id="cartTotal" class="cart-total">Total: €0.00</div>
+                    <button class="checkout-btn">Checkout</button>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main class="product-main max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
@@ -85,24 +110,10 @@
                 <input type="number" id="quantity" value="1" min="1" class="w-24 border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
             </div>
 
-            <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
+            <button id="addToCartBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
                 Add to Cart
             </button>
         </div>
     </main>
-
-    <script>
-        function changeMainImage(thumbnail) {
-            // Remove 'active' class from all thumbnails
-            const thumbnails = document.querySelectorAll('.thumbnail-image');
-            thumbnails.forEach(thumb => thumb.classList.remove('active'));
-
-            // Add 'active' class to the clicked thumbnail
-            thumbnail.classList.add('active');
-
-            // Change the main image source
-            document.getElementById('mainImage').src = thumbnail.src;
-        }
-    </script>
 </body>
 </html>
