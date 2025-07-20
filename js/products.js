@@ -23,17 +23,58 @@ function updateCartDisplay() {
                 <div class="item-info">
                     <h4>${item.name}</h4>
                     <p>Color: ${item.color}, Scent: ${item.scent}</p>
-                    <p>Quantity: ${item.quantity}</p>
                 </div>
-                <div class="item-price">€${(item.price * item.quantity).toFixed(2)}</div>
-                <button onclick="removeFromCart(${item.id})" class="remove-btn">×</button>
+                <div class="item-right">
+                    <div class="quantity-controls">
+                        <button data-item-id="${item.id}" data-action="decrease" class="quantity-btn" ${item.quantity === 0 ? 'disabled' : ''}>-</button>
+                        <span class="quantity-display">${item.quantity}</span>
+                        <button data-item-id="${item.id}" data-action="increase" class="quantity-btn">+</button>
+                    </div>
+                    <div class="item-price">€${(item.price * item.quantity).toFixed(2)}</div>
+                </div>
+                <button data-item-id="${item.id}" class="remove-btn">×</button>
             </div>
         `).join('');
+        
+        // Add event listeners to quantity control buttons
+        const quantityButtons = cartItems.querySelectorAll('.quantity-btn');
+        quantityButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.stopPropagation(); // Prevent event bubbling
+                const itemId = parseInt(this.getAttribute('data-item-id'));
+                const action = this.getAttribute('data-action');
+                updateQuantity(itemId, action);
+            });
+        });
+        
+        // Add event listeners to remove buttons
+        const removeButtons = cartItems.querySelectorAll('.remove-btn');
+        removeButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.stopPropagation(); // Prevent event bubbling
+                const itemId = parseInt(this.getAttribute('data-item-id'));
+                removeFromCart(itemId);
+            });
+        });
     }
     
     // Update total
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     cartTotal.textContent = `Total: €${total.toFixed(2)}`;
+    
+    // Add checkout button functionality
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    if (checkoutBtn) {
+        // Remove existing event listeners
+        const newCheckoutBtn = checkoutBtn.cloneNode(true);
+        checkoutBtn.parentNode.replaceChild(newCheckoutBtn, checkoutBtn);
+        
+        // Add new event listener
+        newCheckoutBtn.addEventListener('click', function(event) {
+            event.stopPropagation();
+            redirectToCheckout();
+        });
+    }
 }
 
 // Add to cart function
@@ -42,34 +83,108 @@ function addToCart() {
     const scent = document.getElementById('scent').value;
     const quantity = parseInt(document.getElementById('quantity').value);
     
-    const product = {
-        id: Date.now(), // Simple ID generation
-        name: 'Sexy Lavender',
-        price: 4,
-        color: color,
-        scent: scent,
-        quantity: quantity
-    };
+    // Check if item with same properties already exists
+    const existingItemIndex = cart.findIndex(item => 
+        item.name === 'Sexy Lavender' && 
+        item.color === color && 
+        item.scent === scent
+    );
     
-    cart.push(product);
+    if (existingItemIndex !== -1) {
+        // Item exists, just update quantity
+        cart[existingItemIndex].quantity += quantity;
+    } else {
+        // New item, add to cart
+        const product = {
+            id: Date.now(), // Simple ID generation
+            name: 'Sexy Lavender',
+            price: 4,
+            color: color,
+            scent: scent,
+            quantity: quantity
+        };
+        cart.push(product);
+    }
+    
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartDisplay();
-    
-    // Show success message
-    alert('Product added to cart!');
 }
 
 // Remove from cart function
 function removeFromCart(itemId) {
     cart = cart.filter(item => item.id !== itemId);
     localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Store dropdown state before updating
+    const dropdown = document.getElementById('cartDropdown');
+    const wasOpen = dropdown && !dropdown.classList.contains('hidden');
+    
     updateCartDisplay();
+    
+    // Keep dropdown open if it was open before
+    if (wasOpen && dropdown) {
+        dropdown.classList.remove('hidden');
+    }
+}
+
+// Update quantity function
+function updateQuantity(itemId, action) {
+    const itemIndex = cart.findIndex(item => item.id === itemId);
+    if (itemIndex === -1) return;
+    
+    if (action === 'increase') {
+        cart[itemIndex].quantity += 1;
+    } else if (action === 'decrease') {
+        // Only decrease if quantity is greater than 0
+        if (cart[itemIndex].quantity > 0) {
+            cart[itemIndex].quantity -= 1;
+        }
+        // Don't remove item when quantity reaches 0, just keep it at 0
+    }
+    
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Store dropdown state before updating
+    const dropdown = document.getElementById('cartDropdown');
+    const wasOpen = dropdown && !dropdown.classList.contains('hidden');
+    
+    updateCartDisplay();
+    
+    // Keep dropdown open if it was open before
+    if (wasOpen && dropdown) {
+        dropdown.classList.remove('hidden');
+    }
 }
 
 // Toggle cart dropdown
 function toggleCart() {
     const dropdown = document.getElementById('cartDropdown');
     dropdown.classList.toggle('hidden');
+}
+
+// Redirect to checkout page
+function redirectToCheckout() {
+    // Check if there are items with quantity > 0
+    const itemsToCheckout = cart.filter(item => item.quantity > 0);
+    
+    if (itemsToCheckout.length === 0) {
+        alert('Your cart is empty. Please add items before proceeding to checkout.');
+        return;
+    }
+    
+    // Determine the correct path based on current page
+    const currentPath = window.location.pathname;
+    let checkoutPath;
+    
+    if (currentPath.includes('/products/')) {
+        // We're in a subdirectory
+        checkoutPath = '../checkout.html';
+    } else {
+        // We're in the root directory
+        checkoutPath = 'checkout.html';
+    }
+    
+    window.location.href = checkoutPath;
 }
 
 // Image gallery function
@@ -100,6 +215,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (cartButton) {
         cartButton.addEventListener('click', toggleCart);
+    }
+    
+    // Prevent cart dropdown from closing when clicking inside it
+    const cartDropdown = document.getElementById('cartDropdown');
+    if (cartDropdown) {
+        cartDropdown.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
     }
     
     // Close cart dropdown when clicking outside
