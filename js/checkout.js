@@ -166,22 +166,64 @@ function processOrder(customerInfo) {
         total: itemsToCheckout.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 3.99
     };
     
-    // Simulate order processing
+    // Process order and send email
     const purchaseBtn = document.getElementById('purchaseBtn');
     purchaseBtn.disabled = true;
     purchaseBtn.textContent = 'Processing...';
-    
-    setTimeout(() => {
-        // Clear cart items that were purchased
-        if (window.cartManager) {
-            window.cartManager.clearCart();
-            cart = window.cartManager.getCart();
+
+    // Send order data to PHP backend
+    sendOrderEmail(order)
+        .then(response => {
+            if (response.success) {
+                console.log('Order email sent successfully');
+                
+                // Clear cart items that were purchased
+                if (window.cartManager) {
+                    window.cartManager.clearCart();
+                    cart = window.cartManager.getCart();
+                }
+                
+                // Show success message
+                alert(`Thank you for your order, ${customerInfo.firstName}! Your order #${order.id} has been confirmed. You will receive a confirmation email shortly.`);
+                
+                // Redirect to home page
+                
+                setTimeout(() => {
+                   // window.location.href = 'index.html';
+                }, 1000);
+            } else {
+                throw new Error(response.message || 'Failed to process order');
+            }
+        })
+        .catch(error => {
+            console.error('Error processing order:', error);
+            alert('There was an error processing your order. Please try again or contact support.');
+            
+            // Re-enable the button
+            purchaseBtn.disabled = false;
+            purchaseBtn.textContent = 'Complete Purchase';
+        });
+}
+
+// Send order email via PHP backend
+async function sendOrderEmail(order) {
+    try {
+        const response = await fetch('send_order_email.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(order)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        // Show success message
-        alert(`Thank you for your order, ${customerInfo.firstName}! Your order #${order.id} has been confirmed. You will receive a confirmation email shortly.`);
-        
-        // Redirect to home page
-        window.location.href = 'index.html';
-    }, 2000);
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error sending order email:', error);
+        throw error;
+    }
 }
