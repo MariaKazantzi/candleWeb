@@ -1,0 +1,20 @@
+# Ignore environment/config files
+env.php
+
+# Ignore Composer dependencies
+/vendor/
+
+# Ignore node modules (if any)
+node_modules/
+
+# Ignore OS and editor files
+*.swp
+*.swo
+.DS_Store
+
+# Ignore log files
+*.log
+
+# Ignore IDE settings
+.vscode/
+.idea/
