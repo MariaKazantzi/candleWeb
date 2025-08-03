@@ -4,6 +4,12 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
+require __DIR__ . '/../vendor/autoload.php'; // Adjust path if needed
+$config = require __DIR__ . '/../env.php';    // Load credentials
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 // Handle preflight requests
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
@@ -31,27 +37,31 @@ $adminEmail = 'mariakazantzi@yahoo.com';
 
 // Email configuration
 $subject = 'New Order Received - Order #' . $orderData['id'];
-
-// Build the email content
 $emailContent = buildEmailContent($orderData);
 
-// Email headers
-$headers = [
-    'MIME-Version: 1.0',
-    'Content-type: text/html; charset=UTF-8',
-    'From: noreply@candleweb.com',
-    'Reply-To: noreply@candleweb.com',
-    'X-Mailer: PHP/' . phpversion()
-];
+$mail = new PHPMailer(true);
+try {
+    // SMTP configuration
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = $config['GMAIL_USER']; // <-- Replace with your Gmail address
+    $mail->Password = $config['GMAIL_PASS'];   // <-- Replace with your Gmail App Password
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
 
-// Send the email
-$emailSent = mail($adminEmail, $subject, $emailContent, implode("\r\n", $headers));
+    $mail->setFrom($config['GMAIL_USER'], 'CandleWeb'); // <-- Replace with your Gmail address
+    $mail->addAddress($adminEmail);
 
-if ($emailSent) {
+    $mail->isHTML(true);
+    $mail->Subject = $subject;
+    $mail->Body    = $emailContent;
+
+    $mail->send();
     echo json_encode(['success' => true, 'message' => 'Order email sent successfully']);
-} else {
+} catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Failed to send email']);
+    echo json_encode(['success' => false, 'message' => 'Mailer Error: ' . $mail->ErrorInfo]);
 }
 
 function buildEmailContent($order) {
