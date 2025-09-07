@@ -55,17 +55,33 @@
 
     <main class="product-main max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         <div class="product-image-gallery">
-            <img id="mainImage" src="../pictures/candle1a.jpg" alt="Main Product Image" class="main-product-image mb-4">
+            <div class="relative">
+                <img id="mainImage" src="../pictures/candle1a.jpg" alt="Main Product Image" class="main-product-image mb-4">
+                
+                <!-- Previous Arrow -->
+                <button id="prevArrow" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full transition-all duration-300" onclick="navigateImage(-1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                </button>
+                
+                <!-- Next Arrow -->
+                <button id="nextArrow" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full transition-all duration-300" onclick="navigateImage(1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
+            </div>
 
             <div class="flex flex-wrap gap-3 justify-center">
-                <img src="../pictures/candle1a.jpg" alt="Product Thumbnail 1" class="thumbnail-image active" onclick="changeMainImage(this)">
-                <img src="../pictures/candle1b.jpg" alt="Product Thumbnail 2" class="thumbnail-image" onclick="changeMainImage(this)">
-                <img src="../pictures/candle1c.jpg" alt="Product Thumbnail 3" class="thumbnail-image" onclick="changeMainImage(this)">
-                <img src="../pictures/candle1d.jpg" alt="Product Thumbnail 4" class="thumbnail-image" onclick="changeMainImage(this)">
-                <img src="../pictures/candle1e.jpg" alt="Product Thumbnail 5" class="thumbnail-image" onclick="changeMainImage(this)">
-                <img src="../pictures/candle1f.jpg" alt="Product Thumbnail 6" class="thumbnail-image" onclick="changeMainImage(this)">
-                <img src="../pictures/candle1g.jpg" alt="Product Thumbnail 7" class="thumbnail-image" onclick="changeMainImage(this)">
-                <img src="../pictures/candle1h.jpg" alt="Product Thumbnail 8" class="thumbnail-image" onclick="changeMainImage(this)">
+                <img src="../pictures/candle1a.jpg" alt="Product Thumbnail 1" class="thumbnail-image active" onclick="changeMainImage(this)" data-index="0">
+                <img src="../pictures/candle1b.jpg" alt="Product Thumbnail 2" class="thumbnail-image" onclick="changeMainImage(this)" data-index="1">
+                <img src="../pictures/candle1c.jpg" alt="Product Thumbnail 3" class="thumbnail-image" onclick="changeMainImage(this)" data-index="2">
+                <img src="../pictures/candle1d.jpg" alt="Product Thumbnail 4" class="thumbnail-image" onclick="changeMainImage(this)" data-index="3">
+                <img src="../pictures/candle1e.jpg" alt="Product Thumbnail 5" class="thumbnail-image" onclick="changeMainImage(this)" data-index="4">
+                <img src="../pictures/candle1f.jpg" alt="Product Thumbnail 6" class="thumbnail-image" onclick="changeMainImage(this)" data-index="5">
+                <img src="../pictures/candle1g.jpg" alt="Product Thumbnail 7" class="thumbnail-image" onclick="changeMainImage(this)" data-index="6">
+                <img src="../pictures/candle1h.jpg" alt="Product Thumbnail 8" class="thumbnail-image" onclick="changeMainImage(this)" data-index="7">
             </div>
         </div>
 
@@ -75,7 +91,7 @@
 
             <div class="flex items-baseline mb-6">
                 <span class="text-5xl font-extrabold text-indigo-700 mr-2">2,95€</span>
-                <span class="text-gray-500 line-through text-lg">4€</span> </div>
+            </div>
 
             <h3 class="text-2xl font-semibold text-gray-800 mb-3">Product Description</h3>
             <!-- List of product specifications -->
@@ -84,8 +100,8 @@
                 <div>
                     <span class="font-semibold text-gray-900">Dimensions:</span>
                     <ul class="list-disc list-inside mt-1 ml-4 space-y-1">
-                        <li><span class="font-medium">Length:</span> 2 inches (5 cm)</li>
-                        <li><span class="font-medium">Height:</span> 1.5 inches (3.8 cm)</li>
+                        <li><span class="font-medium">Length:</span> 3.5 cm</li>
+                        <li><span class="font-medium">Height:</span> 2 cm</li>
                     </ul>
                 </div>
             
@@ -98,22 +114,27 @@
             <!-- Burn Time section -->
             <div>
                 <span class="font-semibold text-gray-900">Burn Time:</span>
-                <p class="mt-1 ml-4">Approximately 3-4 hours</p>
+                <p class="mt-1 ml-4">Approximately 5-10 hours</p>
+            </div>
+
+            <!-- Weight section -->
+            <div>
+                <span class="font-semibold text-gray-900">Weight:</span>
+                <p class="mt-1 ml-4">20g</p>
             </div>
 
             <div class="mb-6">
                 <label for="macaroonColor" class="block text-gray-700 text-lg font-semibold mb-2">Macaroon Color:</label>
                 <select id="macaroonColor" class="block w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                    <option value="black">Black</option>
-                    <option value="white">White</option>
-                    <option value="grey">Grey</option>
-                    <option value="red">Red</option>
-                    <option value="blue">Blue</option>
-                    <option value="green">Green</option>
                     <option value="yellow">Yellow</option>
                     <option value="orange">Orange</option>
-                    <option value="purple">Purple</option>
+                    <option value="red">Red</option>
                     <option value="pink">Pink</option>
+                    <option value="purple">Purple</option>
+                    <option value="blue">Blue</option>
+                    <option value="lightblue">Light Blue</option>
+                    <option value="green">Green</option>
+                    <option value="lightgreen">Light Green</option>
                     <option value="brown">Brown</option>
                 </select>
             </div>
@@ -121,16 +142,16 @@
             <div class="mb-6">
                 <label for="fillingColor" class="block text-gray-700 text-lg font-semibold mb-2">Filling Color:</label>
                 <select id="fillingColor" class="block w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                    <option value="black">Black</option>
                     <option value="white">White</option>
-                    <option value="grey">Grey</option>
-                    <option value="red">Red</option>
-                    <option value="blue">Blue</option>
-                    <option value="green">Green</option>
                     <option value="yellow">Yellow</option>
                     <option value="orange">Orange</option>
-                    <option value="purple">Purple</option>
+                    <option value="red">Red</option>
                     <option value="pink">Pink</option>
+                    <option value="purple">Purple</option>
+                    <option value="blue">Blue</option>
+                    <option value="lightblue">Light Blue</option>
+                    <option value="green">Green</option>
+                    <option value="lightgreen">Light Green</option>
                     <option value="brown">Brown</option>
                 </select>
             </div>
@@ -138,18 +159,6 @@
             <div class="mb-6">
                 <label for="macaroonScent" class="block text-gray-700 text-lg font-semibold mb-2">Macaroon Scent:</label>
                 <select id="macaroonScent" class="block w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                    <option value="vanilla">Vanilla</option>
-                    <option value="coconut">Coconut</option>
-                    <option value="cherry">Cherry</option>
-                    <option value="lemon">Lemon</option>
-                    <option value="lavender">Lavender</option>
-                    <option value="rose">Rose</option>
-                </select>
-            </div>
-
-            <div class="mb-6">
-                <label for="fillingScent" class="block text-gray-700 text-lg font-semibold mb-2">Filling Scent:</label>
-                <select id="fillingScent" class="block w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                     <option value="vanilla">Vanilla</option>
                     <option value="coconut">Coconut</option>
                     <option value="cherry">Cherry</option>
@@ -169,5 +178,63 @@
             </button>
         </div>
     </main>
+
+    <script>
+        // Array of image sources
+        const imageList = [
+            '../pictures/candle1a.jpg',
+            '../pictures/candle1b.jpg',
+            '../pictures/candle1c.jpg',
+            '../pictures/candle1d.jpg',
+            '../pictures/candle1e.jpg',
+            '../pictures/candle1f.jpg',
+            '../pictures/candle1g.jpg',
+            '../pictures/candle1h.jpg'
+        ];
+        
+        let currentImageIndex = 0;
+        
+        function changeMainImage(element) {
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = element.src;
+            
+            // Update active thumbnail
+            document.querySelectorAll('.thumbnail-image').forEach(img => img.classList.remove('active'));
+            element.classList.add('active');
+            
+            // Update current index
+            currentImageIndex = parseInt(element.getAttribute('data-index'));
+        }
+        
+        function navigateImage(direction) {
+            // Calculate new index
+            currentImageIndex += direction;
+            
+            // Handle wraparound
+            if (currentImageIndex >= imageList.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = imageList.length - 1;
+            }
+            
+            // Update main image
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = imageList[currentImageIndex];
+            
+            // Update active thumbnail
+            document.querySelectorAll('.thumbnail-image').forEach(img => img.classList.remove('active'));
+            const thumbnails = document.querySelectorAll('.thumbnail-image');
+            thumbnails[currentImageIndex].classList.add('active');
+        }
+        
+        // Optional: Add keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                navigateImage(-1);
+            } else if (event.key === 'ArrowRight') {
+                navigateImage(1);
+            }
+        });
+    </script>
 </body>
 </html>
