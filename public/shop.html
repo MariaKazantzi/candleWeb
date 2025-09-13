@@ -55,95 +55,203 @@
     </header>
 
     <main class="shop-main max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Product Card 1 -->
-            <a href="products/product1.html" class="product-card block bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div class="relative overflow-hidden rounded-t-xl">
-                    <img src="pictures\candle1.png" alt="Product 1" class="product-image">
+
+        <!-- Products Section Header -->
+        <div class="section-header mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">All Products</h2>
+            <div class="flex justify-between items-center">
+                <p class="text-gray-600">8 products available</p>
+                <div class="filter-options flex items-center space-x-4">
+                    <span class="text-sm text-gray-500">Sort by:</span>
+                    <select class="border border-gray-300 rounded-lg px-3 py-1 text-sm bg-white">
+                        <option>Featured</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Newest</option>
+                    </select>
                 </div>
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-1">Macaroon</h2>
-                    <p class="text-gray-600 text-lg font-bold">2,95€</p>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Product Card 1 -->
+            <a href="products/product1.html" class="product-card group">
+                <div class="product-card-inner">
+                    <div class="product-image-container">
+                        <img src="pictures\candle1.png" alt="Macaroon Candle" class="product-image">
+                        <div class="product-overlay">
+                            <span class="view-details">View Details</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Decorative Candles</div>
+                        <h2 class="product-title">Macaroon</h2>
+                        <p class="product-description">Sweet and charming macaron-shaped candle</p>
+                        <div class="product-pricing">
+                            <span class="product-price">€2,95</span>
+                        </div>
+                    </div>
                 </div>
             </a>
 
             <!-- Product Card 2 -->
-            <a href="products/product2.html" class="product-card block bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div class="relative overflow-hidden rounded-t-xl">
-                    <img src="pictures\candle2.png" alt="Product 2" class="product-image">
-                </div>
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-1">Teddy Bear</h2>
-                    <p class="text-gray-600 text-lg font-bold">2,95€</p>
+            <a href="products/product2.html" class="product-card group">
+                <div class="product-card-inner">
+                    <div class="product-image-container">
+                        <img src="pictures\candle2.png" alt="Teddy Bear Candle" class="product-image">
+                        <div class="product-overlay">
+                            <span class="view-details">View Details</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Decorative Candles</div>
+                        <h2 class="product-title">Teddy Bear</h2>
+                        <p class="product-description">Adorable teddy bear shaped candle</p>
+                        <div class="product-pricing">
+                            <span class="product-price">€2,95</span>
+                        </div>
+                    </div>
                 </div>
             </a>
 
             <!-- Product Card 3 -->
-            <a href="products/product3.html" class="product-card block bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div class="relative overflow-hidden rounded-t-xl">
-                    <img src="pictures\candle3.png" alt="Product 3" class="product-image">
-                </div>
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-1">Sea shell</h2>
-                    <p class="text-gray-600 text-lg font-bold">3,95€</p>
+            <a href="products/product3.html" class="product-card group">
+                <div class="product-card-inner">
+                    <div class="product-image-container">
+                        <img src="pictures\candle3.png" alt="Sea Shell Candle" class="product-image">
+                        <div class="product-overlay">
+                            <span class="view-details">View Details</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Ocean Collection</div>
+                        <h2 class="product-title">Sea Shell</h2>
+                        <p class="product-description">Beautiful seashell-inspired candle</p>
+                        <div class="product-pricing">
+                            <span class="product-price">€3,95</span>
+                        </div>
+                    </div>
                 </div>
             </a>
 
             <!-- Product Card 4 -->
-            <a href="products/product4.html" class="product-card block bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div class="relative overflow-hidden rounded-t-xl">
-                    <img src="pictures\candle4.png" alt="Product 4" class="product-image">
-                </div>
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-1">Small Bubble Cube</h2>
-                    <p class="text-gray-600 text-lg font-bold">2,95€</p>
+            <a href="products/product4.html" class="product-card group">
+                <div class="product-card-inner">
+                    <div class="product-image-container">
+                        <img src="pictures\candle4.png" alt="Small Bubble Cube Candle" class="product-image">
+                        <div class="product-overlay">
+                            <span class="view-details">View Details</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Geometric Collection</div>
+                        <h2 class="product-title">Small Bubble Cube</h2>
+                        <p class="product-description">Modern geometric design with bubble texture</p>
+                        <div class="product-pricing">
+                            <span class="product-price">€2,95</span>
+                        </div>
+                    </div>
                 </div>
             </a>
 
             <!-- Product Card 5 -->
-            <a href="products/product5.html" class="product-card block bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div class="relative overflow-hidden rounded-t-xl">
-                    <img src="pictures\candle5.png" alt="Product 5" class="product-image">
-                </div>
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-1">Big Bubble Cube</h2>
-                    <p class="text-gray-600 text-lg font-bold">5,95€</p>
+            <a href="products/product5.html" class="product-card group">
+                <div class="product-card-inner">
+                    <div class="product-image-container">
+                        <img src="pictures\candle5.png" alt="Big Bubble Cube Candle" class="product-image">
+                        <div class="product-overlay">
+                            <span class="view-details">View Details</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Geometric Collection</div>
+                        <h2 class="product-title">Big Bubble Cube</h2>
+                        <p class="product-description">Large geometric candle with bubble texture</p>
+                        <div class="product-pricing">
+                            <span class="product-price">€5,95</span>
+                        </div>
+                    </div>
                 </div>
             </a>
 
             <!-- Product Card 6 -->
-            <a href="products/product6.html" class="product-card block bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div class="relative overflow-hidden rounded-t-xl">
-                    <img src="pictures\candle6.png" alt="Product 6" class="product-image">
-                </div>
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-1">Big Heart Cube</h2>
-                    <p class="text-gray-600 text-lg font-bold">5,95€</p>
+            <a href="products/product6.html" class="product-card group">
+                <div class="product-card-inner">
+                    <div class="product-image-container">
+                        <img src="pictures\candle6.png" alt="Big Heart Cube Candle" class="product-image">
+                        <div class="product-overlay">
+                            <span class="view-details">View Details</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Love Collection</div>
+                        <h2 class="product-title">Big Heart Cube</h2>
+                        <p class="product-description">Romantic heart-shaped candle cube</p>
+                        <div class="product-pricing">
+                            <span class="product-price">€5,95</span>
+                        </div>
+                    </div>
                 </div>
             </a>
 
             <!-- Product Card 7 -->
-            <a href="products/product7.html" class="product-card block bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div class="relative overflow-hidden rounded-t-xl">
-                    <img src="pictures/candle7.png" alt="Product 7" class="product-image">
-                </div>
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-1">Ying Yang</h2>
-                    <p class="text-gray-600 text-lg font-bold">7,95€</p>
+            <a href="products/product7.html" class="product-card group">
+                <div class="product-card-inner">
+                    <div class="product-image-container">
+                        <img src="pictures/candle7.png" alt="Yin Yang Candle" class="product-image">
+                        <div class="product-overlay">
+                            <span class="view-details">View Details</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Zen Collection</div>
+                        <h2 class="product-title">Yin Yang</h2>
+                        <p class="product-description">Balanced harmony in candle form</p>
+                        <div class="product-pricing">
+                            <span class="product-price">€7,95</span>
+                        </div>
+                    </div>
                 </div>
             </a>
 
             <!-- Product Card 8 -->
-            <a href="products/product8.html" class="product-card block bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div class="relative overflow-hidden rounded-t-xl">
-                    <img src="pictures/candle8.png" alt="Product 8" class="product-image">
-                </div>
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-1">Mystery Box</h2>
-                    <p class="text-gray-600 text-lg font-bold">15,95€</p>
+            <a href="products/product8.html" class="product-card group">
+                <div class="product-card-inner">
+                    <div class="product-image-container">
+                        <img src="pictures/candle8.png" alt="Mystery Box Candle" class="product-image">
+                        <div class="product-overlay">
+                            <span class="view-details">View Details</span>
+                        </div>
+                        <div class="product-badge">Best Value</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Special Offers</div>
+                        <h2 class="product-title">Mystery Box</h2>
+                        <p class="product-description">Surprise collection of assorted candles</p>
+                        <div class="product-pricing">
+                            <span class="product-price">€15,95</span>
+                            <span class="product-price-original">€20,00</span>
+                        </div>
+                    </div>
                 </div>
             </a>
         </div>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section mt-16 bg-gradient-to-r from-rose-100 to-pink-100 rounded-2xl p-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Stay Updated</h3>
+                <p class="text-gray-600 mb-6">Subscribe to our newsletter for new arrivals and exclusive offers</p>
+                <div class="flex justify-center max-w-md mx-auto">
+                    <input type="email" placeholder="Enter your email" 
+                           class="flex-1 px-4 py-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-pink-500">
+                    <button class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-r-lg transition-colors">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 </html>

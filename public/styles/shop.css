@@ -1,23 +1,304 @@
-/* Custom font for a clean look - ensure 'Puddy Gum' is loaded if you want to use it */
-/* For 'Puddy Gum', you'd typically link it from Google Fonts or similar */
-/* Example: @import url('https://fonts.googleapis.com/css2?family=Puddy+Gum&display=swap'); */
+/* Import Google Fonts for better typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Ensure images within product cards fit nicely */
-.product-image {
-    width: 100%;
-    height: 192px; /* Fixed height for consistent card appearance */
-    object-fit: cover; /* Cover the area, cropping if necessary */
-    border-radius: 0.5rem; /* rounded-lg */
-    transition: transform 0.3s ease-in-out; /* Smooth transition for zoom effect */
+/* Override body background for shop page */
+body {
+    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
+    min-height: 100vh;
 }
 
-/* Hover effect for the image */
-.product-card:hover .product-image {
-    transform: scale(1.05); /* Zoom in slightly on hover */
-}
-
-/* Shop main content spacing */
+/* Shop main content spacing and background */
 .shop-main {
     margin-top: 160px; /* Account for fixed header */
     padding: 2rem 1rem;
+    background: transparent; /* Let body background show through */
+    min-height: calc(100vh - 160px);
+}
+
+/* Hero Section Styling */
+.hero-section {
+    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+    border: 1px solid #f9a8d4;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,182,193,0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* Breadcrumb Styling */
+.breadcrumb ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Section Header */
+.section-header {
+    border-bottom: 2px solid #f3f4f6;
+    padding-bottom: 1rem;
+}
+
+.filter-options select {
+    transition: all 0.2s ease;
+}
+
+.filter-options select:focus {
+    outline: none;
+    border-color: #ec4899;
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+}
+
+/* Enhanced Product Cards */
+.product-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-card-inner {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #f1f5f9;
+}
+
+.product-card:hover .product-card-inner {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: #ec4899;
+}
+
+/* Product Image Container */
+.product-image-container {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.1);
+}
+
+/* Product Overlay */
+.product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-card:hover .product-overlay {
+    opacity: 1;
+}
+
+.view-details {
+    color: white;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 2px solid white;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.product-overlay:hover .view-details {
+    background: white;
+    color: #1f2937;
+}
+
+/* Product Badge */
+.product-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+    z-index: 10;
+}
+
+/* Product Info */
+.product-info {
+    padding: 24px 20px;
+}
+
+.product-category {
+    font-size: 0.75rem;
+    color: #ec4899;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.product-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.product-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+/* Product Pricing */
+.product-pricing {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.product-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.product-price-original {
+    font-size: 1rem;
+    color: #9ca3af;
+    text-decoration: line-through;
+    margin-left: 8px;
+}
+
+/* Product Rating */
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stars {
+    color: #fbbf24;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+}
+
+.rating-count {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    background: linear-gradient(135deg, #fef7f0 0%, #fce7f3 100%);
+    border: 1px solid #f9a8d4;
+}
+
+.newsletter-section input:focus {
+    outline: none;
+    border-color: #ec4899;
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .shop-main {
+        margin-top: 140px;
+        padding: 1rem;
+    }
+    
+    .hero-section {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .section-header {
+        margin-bottom: 1.5rem;
+    }
+    
+    .section-header .flex {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .products-grid {
+        gap: 1.5rem;
+    }
+    
+    .product-info {
+        padding: 1rem;
+    }
+    
+    .newsletter-section {
+        margin-top: 3rem;
+        padding: 1.5rem;
+    }
+    
+    .newsletter-section .flex {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .newsletter-section input,
+    .newsletter-section button {
+        border-radius: 0.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero-section h1 {
+        font-size: 1.75rem;
+    }
+    
+    .hero-section p {
+        font-size: 1rem;
+    }
+    
+    .hero-section .flex {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 }
