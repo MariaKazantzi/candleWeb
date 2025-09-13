@@ -56,7 +56,7 @@
     <main class="product-main max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         <div class="product-image-gallery">
             <div class="relative">
-                <img id="mainImage" src="../pictures/candle4a.jpg" alt="Main Product Image" class="main-product-image mb-4">
+                <img id="mainImage" src="../pictures/candle8.png" alt="Main Product Image" class="main-product-image mb-4">
                 
                 <!-- Navigation Arrows -->
                 <button id="prevBtn" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all duration-200" onclick="navigateImage(-1)">
@@ -73,52 +73,17 @@
             </div>
 
             <div class="flex flex-wrap gap-3 justify-center">
-                <img src="../pictures/candle4a.jpg" alt="Product Thumbnail 1" class="thumbnail-image active" onclick="changeMainImage(this)" data-index="0">
-                <img src="../pictures/candle4b.jpg" alt="Product Thumbnail 2" class="thumbnail-image" onclick="changeMainImage(this)" data-index="1">
-                <img src="../pictures/candle4c.jpg" alt="Product Thumbnail 3" class="thumbnail-image" onclick="changeMainImage(this)" data-index="2">
+                <img src="../pictures/candle8.png" alt="Product Thumbnail 1" class="thumbnail-image active" onclick="changeMainImage(this)" data-index="0">
             </div>
         </div>
 
         <div class="product-details">
-            <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-3">Cubes</h2>
-            <p class="text-gray-600 text-xl mb-4">A cutting-edge device designed for ultimate performance and style.</p>
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-3">Mystery Box</h2>
+            <p class="text-gray-600 text-xl mb-4">Unbox the ultimate candle experience! This mystery box is a sweet surprise, filled with a curated selection of our finest candles. You pay just 14,95€, but the treasures inside have a guaranteed value of at least 20€. It's a delightful way to discover new scents and styles, bringing a little bit of magic to your home at an incredible value. What's inside is a secret, but the joy of unboxing is a promise!
+</p>
 
             <div class="flex items-baseline mb-6">
-                <span class="text-5xl font-extrabold text-indigo-700 mr-2">6,50€</span>
-                <span class="text-gray-500 line-through text-lg">9€</span> </div>
-
-            <h3 class="text-2xl font-semibold text-gray-800 mb-3">Product Description</h3>
-            <p class="text-gray-700 leading-relaxed mb-6">
-                This **Stylish Gadget Pro Max** boasts an impressive array of features, from its lightning-fast processor to its stunning high-definition display. Crafted with premium materials, it offers an ergonomic design that fits perfectly in your hand. Ideal for both work and play, it's the perfect companion for anyone seeking top-tier technology and unparalleled elegance. Long-lasting battery life ensures you stay connected all day.
-            </p>
-
-            <div class="mb-6">
-                <label for="color" class="block text-gray-700 text-lg font-semibold mb-2">Color:</label>
-                <select id="color" class="block w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                    <option value="black">Black</option>
-                    <option value="white">White</option>
-                    <option value="grey">Grey</option>
-                    <option value="red">Red</option>
-                    <option value="blue">Blue</option>
-                    <option value="green">Green</option>
-                    <option value="yellow">Yellow</option>
-                    <option value="orange">Orange</option>
-                    <option value="purple">Purple</option>
-                    <option value="pink">Pink</option>
-                    <option value="brown">Brown</option>
-                </select>
-            </div>
-
-            <div class="mb-6">
-                <label for="scent" class="block text-gray-700 text-lg font-semibold mb-2">Scent:</label>
-                <select id="scent" class="block w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                    <option value="vanilla">Vanilla</option>
-                    <option value="coconut">Coconut</option>
-                    <option value="cherry">Cherry</option>
-                    <option value="lemon">Lemon</option>
-                    <option value="lavender">Lavender</option>
-                    <option value="rose">Rose</option>
-                </select>
+                <span class="text-5xl font-extrabold text-indigo-700 mr-2">15,95€</span>
             </div>
 
             <div class="mb-6">
@@ -135,9 +100,7 @@
     <script>
         // Image list for navigation
         const imageList = [
-            '../pictures/candle4a.jpg',
-            '../pictures/candle4b.jpg',
-            '../pictures/candle4c.jpg'
+            '../pictures/candle8.png',
         ];
 
         let currentImageIndex = 0;

@@ -31,7 +31,7 @@
         <!-- Shopping Cart -->
         <div class="cart-container">
             <button id="cartButton" class="cart-button">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cart-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColour" class="cart-icon">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                 </svg>
                 <span id="cartCount" class="cart-count">0</span>
@@ -60,14 +60,14 @@
                 
                 <!-- Previous Arrow -->
                 <button id="prevArrow" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full transition-all duration-300" onclick="navigateImage(-1)">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColour" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                     </svg>
                 </button>
                 
                 <!-- Next Arrow -->
                 <button id="nextArrow" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full transition-all duration-300" onclick="navigateImage(1)">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColour" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                     </svg>
                 </button>
@@ -82,7 +82,7 @@
         </div>
 
         <div class="product-details">
-            <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-3">Sea shell</h2>
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-3">Sea Shell</h2>
             <p class="text-gray-600 text-xl mb-4">A tiny treasure from the ocean, this sea shell candle is ready to light up your space with a gentle, coastal glow. Its delicate design captures the serene beauty of the sea, making it a perfect accent for any room. So captivating, you almost won't want to burn it. Almost.</p>
 
             <div class="flex items-baseline mb-6">
@@ -121,8 +121,9 @@
 
 
             <div class="mb-6">
-                <label for="color" class="block text-gray-700 text-lg font-semibold mb-2">Color:</label>
-                <select id="color" class="block w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                <label for="colour" class="block text-gray-700 text-lg font-semibold mb-2">Colour:</label>
+                <select id="colour" class="block w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                    <option value="" disabled selected hidden>Select colour</option>
                     <option value="black">Black</option>
                     <option value="white">White</option>
                     <option value="grey">Grey</option>
@@ -140,6 +141,7 @@
             <div class="mb-6">
                 <label for="scent" class="block text-gray-700 text-lg font-semibold mb-2">Scent:</label>
                 <select id="scent" class="block w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                    <option value="" disabled selected hidden>Select scent</option>
                     <option value="vanilla">Vanilla</option>
                     <option value="coconut">Coconut</option>
                     <option value="cherry">Cherry</option>
