@@ -186,6 +186,316 @@ function changeMainImage(thumbnail) {
     document.getElementById('mainImage').src = thumbnail.src;
 }
 
+// Quantity adjustment function
+function adjustQuantity(change) {
+    const quantityInput = document.getElementById('quantity');
+    if (!quantityInput) return;
+    
+    let currentValue = parseInt(quantityInput.value);
+    let newValue = currentValue + change;
+    
+    if (newValue >= 1) {
+        quantityInput.value = newValue;
+    }
+}
+
+// Add to Cart functionality
+function initializeAddToCart(productData) {
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    if (!addToCartBtn) return;
+    
+    addToCartBtn.addEventListener('click', function() {
+        // Get product customization values based on product type
+        const customization = getProductCustomization(productData);
+        
+        if (!customization.isValid) {
+            alert(customization.errorMessage);
+            return;
+        }
+        
+        // Create the cart item
+        const cartItem = {
+            name: productData.name,
+            price: productData.price,
+            quantity: customization.quantity,
+            image: productData.image,
+            ...customization.data
+        };
+        
+        // Add to cart using the cart manager
+        if (window.cartManager) {
+            const success = window.cartManager.addItem(cartItem);
+            if (success) {
+                // Show success message
+                showAddToCartSuccess();
+                
+                // Reset form
+                resetProductForm();
+                
+                // Force cart UI update and broadcast
+                if (window.cartUI) {
+                    window.cartUI.refresh();
+                    window.cartUI.triggerPageSpecificUpdates();
+                }
+                
+                // Dispatch custom event for immediate updates
+                window.dispatchEvent(new CustomEvent('cartItemAdded', { 
+                    detail: { product: cartItem, cart: window.cartManager.getCart() }
+                }));
+                
+                console.log('Product added to cart successfully:', cartItem.name);
+            } else {
+                alert('Failed to add item to cart. Please try again.');
+            }
+        } else {
+            alert('Cart system not available. Please refresh the page.');
+        }
+    });
+}
+
+// Get product customization based on current page/product
+function getProductCustomization(productData) {
+    const quantity = parseInt(document.getElementById('quantity')?.value || 1);
+    
+    if (!quantity || quantity < 1) {
+        return {
+            isValid: false,
+            errorMessage: 'Please enter a valid quantity'
+        };
+    }
+    
+    // Handle different product types based on current page
+    const currentPath = window.location.pathname;
+    
+    if (currentPath.includes('product1.html')) {
+        // Macaroon candle
+        const macaroonColour = document.getElementById('macaroonColour')?.value;
+        const fillingColour = document.getElementById('fillingColour')?.value;
+        const macaroonScent = document.getElementById('macaroonScent')?.value;
+        
+        if (!macaroonColour) {
+            return { isValid: false, errorMessage: 'Please select a macaroon colour' };
+        }
+        if (!fillingColour) {
+            return { isValid: false, errorMessage: 'Please select a filling colour' };
+        }
+        if (!macaroonScent) {
+            return { isValid: false, errorMessage: 'Please select a scent' };
+        }
+        
+        return {
+            isValid: true,
+            quantity: quantity,
+            data: {
+                color: `${macaroonColour} / ${fillingColour}`,
+                scent: macaroonScent,
+                customization: {
+                    macaroonColour: macaroonColour,
+                    fillingColour: fillingColour,
+                    scent: macaroonScent
+                }
+            }
+        };
+    } else if (currentPath.includes('product2.html')) {
+        // Teddy Bear candle
+        const bearColor = document.getElementById('colour')?.value;
+        const bearScent = document.getElementById('scent')?.value;
+        
+        if (!bearColor) {
+            return { isValid: false, errorMessage: 'Please select a bear color' };
+        }
+        if (!bearScent) {
+            return { isValid: false, errorMessage: 'Please select a scent' };
+        }
+        
+        return {
+            isValid: true,
+            quantity: quantity,
+            data: {
+                color: bearColor,
+                scent: bearScent,
+                customization: {
+                    bearColor: bearColor,
+                    scent: bearScent
+                }
+            }
+        };
+    } else if (currentPath.includes('product3.html') || currentPath.includes('product4.html') || 
+               currentPath.includes('product5.html') || currentPath.includes('product6.html')) {
+        // Sea Shell, Bubble Cubes, Heart Cube candles
+        const color = document.getElementById('colour')?.value;
+        const scent = document.getElementById('scent')?.value;
+        
+        if (!color) {
+            return { isValid: false, errorMessage: 'Please select a color' };
+        }
+        if (!scent) {
+            return { isValid: false, errorMessage: 'Please select a scent' };
+        }
+        
+        return {
+            isValid: true,
+            quantity: quantity,
+            data: {
+                color: color,
+                scent: scent,
+                customization: {
+                    color: color,
+                    scent: scent
+                }
+            }
+        };
+    } else if (currentPath.includes('product7.html')) {
+        // Yin Yang candle - has two colors
+        const colour1 = document.getElementById('colour1')?.value;
+        const colour2 = document.getElementById('colour2')?.value;
+        const scent = document.getElementById('scent')?.value;
+        
+        if (!colour1) {
+            return { isValid: false, errorMessage: 'Please select the first colour' };
+        }
+        if (!colour2) {
+            return { isValid: false, errorMessage: 'Please select the second colour' };
+        }
+        if (!scent) {
+            return { isValid: false, errorMessage: 'Please select a scent' };
+        }
+        
+        return {
+            isValid: true,
+            quantity: quantity,
+            data: {
+                color: `${colour1} / ${colour2}`,
+                scent: scent,
+                customization: {
+                    colour1: colour1,
+                    colour2: colour2,
+                    scent: scent
+                }
+            }
+        };
+    } else {
+        // Generic product (no customization)
+        return {
+            isValid: true,
+            quantity: quantity,
+            data: {
+                color: 'Default',
+                scent: 'Unscented'
+            }
+        };
+    }
+}
+
+// Reset product form after adding to cart
+function resetProductForm() {
+    const currentPath = window.location.pathname;
+    
+    if (currentPath.includes('product1.html')) {
+        // Reset macaroon form
+        const macaroonColour = document.getElementById('macaroonColour');
+        const fillingColour = document.getElementById('fillingColour');
+        const macaroonScent = document.getElementById('macaroonScent');
+        const quantity = document.getElementById('quantity');
+        
+        if (macaroonColour) macaroonColour.value = '';
+        if (fillingColour) fillingColour.value = '';
+        if (macaroonScent) macaroonScent.value = '';
+        if (quantity) quantity.value = '1';
+    } else if (currentPath.includes('product2.html')) {
+        // Reset teddy bear form
+        const bearColor = document.getElementById('colour');
+        const bearScent = document.getElementById('scent');
+        const quantity = document.getElementById('quantity');
+        
+        if (bearColor) bearColor.value = '';
+        if (bearScent) bearScent.value = '';
+        if (quantity) quantity.value = '1';
+    } else if (currentPath.includes('product3.html') || currentPath.includes('product4.html') || 
+               currentPath.includes('product5.html') || currentPath.includes('product6.html')) {
+        // Reset color and scent form for products 3-6
+        const color = document.getElementById('colour');
+        const scent = document.getElementById('scent');
+        const quantity = document.getElementById('quantity');
+        
+        if (color) color.value = '';
+        if (scent) scent.value = '';
+        if (quantity) quantity.value = '1';
+    } else if (currentPath.includes('product7.html')) {
+        // Reset Yin Yang form with two colors
+        const colour1 = document.getElementById('colour1');
+        const colour2 = document.getElementById('colour2');
+        const scent = document.getElementById('scent');
+        const quantity = document.getElementById('quantity');
+        
+        if (colour1) colour1.value = '';
+        if (colour2) colour2.value = '';
+        if (scent) scent.value = '';
+        if (quantity) quantity.value = '1';
+    } else {
+        // Reset generic form
+        const quantity = document.getElementById('quantity');
+        if (quantity) quantity.value = '1';
+    }
+}
+
+// Show success message when item is added to cart
+function showAddToCartSuccess() {
+    // Create success notification
+    const notification = document.createElement('div');
+    notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+    notification.innerHTML = `
+        <div class="flex items-center space-x-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Added to cart successfully!</span>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.classList.remove('translate-x-full');
+    }, 100);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.classList.add('translate-x-full');
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// Get current product data based on page
+function getCurrentProductData() {
+    const currentPath = window.location.pathname;
+    
+    if (currentPath.includes('product1.html')) {
+        return productsData.find(p => p.id === 1);
+    } else if (currentPath.includes('product2.html')) {
+        return productsData.find(p => p.id === 2);
+    } else if (currentPath.includes('product3.html')) {
+        return productsData.find(p => p.id === 3);
+    } else if (currentPath.includes('product4.html')) {
+        return productsData.find(p => p.id === 4);
+    } else if (currentPath.includes('product5.html')) {
+        return productsData.find(p => p.id === 5);
+    } else if (currentPath.includes('product6.html')) {
+        return productsData.find(p => p.id === 6);
+    } else if (currentPath.includes('product7.html')) {
+        return productsData.find(p => p.id === 7);
+    } else if (currentPath.includes('product8.html')) {
+        return productsData.find(p => p.id === 8);
+    }
+    
+    return null;
+}
+
 // Initialize page-specific functionality
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Products page loaded');
@@ -200,5 +510,14 @@ document.addEventListener('DOMContentLoaded', function() {
         handleSortChange();
         
         console.log('Shop page sorting initialized');
+    }
+    
+    // Initialize Add to Cart functionality on product pages
+    if (window.location.pathname.includes('product')) {
+        const currentProduct = getCurrentProductData();
+        if (currentProduct) {
+            initializeAddToCart(currentProduct);
+            console.log('Add to Cart initialized for:', currentProduct.name);
+        }
     }
 });

@@ -419,6 +419,114 @@
             
             quantityInput.value = currentQuantity;
         }
+
+        // Review functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            let selectedRating = 0;
+            
+            // Handle star rating
+            const starButtons = document.querySelectorAll('.star-btn');
+            starButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    selectedRating = parseInt(this.getAttribute('data-rating'));
+                    updateStarDisplay();
+                });
+                
+                button.addEventListener('mouseenter', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    highlightStars(rating);
+                });
+            });
+            
+            // Reset stars on mouse leave
+            document.getElementById('ratingStars').addEventListener('mouseleave', function() {
+                updateStarDisplay();
+            });
+            
+            function updateStarDisplay() {
+                starButtons.forEach((button, index) => {
+                    if (index < selectedRating) {
+                        button.classList.remove('text-gray-300');
+                        button.classList.add('text-yellow-400');
+                    } else {
+                        button.classList.remove('text-yellow-400');
+                        button.classList.add('text-gray-300');
+                    }
+                });
+            }
+            
+            function highlightStars(rating) {
+                starButtons.forEach((button, index) => {
+                    if (index < rating) {
+                        button.classList.remove('text-gray-300');
+                        button.classList.add('text-yellow-400');
+                    } else {
+                        button.classList.remove('text-yellow-400');
+                        button.classList.add('text-gray-300');
+                    }
+                });
+            }
+            
+            // Photo upload preview
+            const photoInput = document.getElementById('reviewPhoto');
+            const photoPreview = document.getElementById('photoPreview');
+            
+            photoInput.addEventListener('change', function(e) {
+                photoPreview.innerHTML = '';
+                const files = Array.from(e.target.files);
+                
+                files.forEach((file, index) => {
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const photoContainer = document.createElement('div');
+                            photoContainer.className = 'relative';
+                            photoContainer.innerHTML = `
+                                <img src="${e.target.result}" alt="Review photo ${index + 1}" class="w-full h-20 object-cover rounded-lg">
+                                <button type="button" onclick="removePhoto(this)" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600 transition-colors">
+                                    ×
+                                </button>
+                            `;
+                            photoPreview.appendChild(photoContainer);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+            
+            // Review form submission
+            document.getElementById('reviewForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (selectedRating === 0) {
+                    alert('Please select a rating');
+                    return;
+                }
+                
+                const formData = {
+                    rating: selectedRating,
+                    name: document.getElementById('reviewerName').value,
+                    title: document.getElementById('reviewTitle').value,
+                    text: document.getElementById('reviewText').value,
+                    photos: Array.from(photoInput.files)
+                };
+                
+                // Here you would typically send the data to your server
+                console.log('Review submitted:', formData);
+                alert('Thank you for your review! It will be published after moderation.');
+                
+                // Reset form
+                this.reset();
+                selectedRating = 0;
+                updateStarDisplay();
+                photoPreview.innerHTML = '';
+            });
+        });
+        
+        // Function to remove photo from preview
+        function removePhoto(button) {
+            button.parentElement.remove();
+        }
         
         // Optional: Add keyboard navigation
         document.addEventListener('keydown', function(event) {

@@ -447,7 +447,7 @@
             quantityInput.value = newQuantity;
         }
 
-        // Enhanced Add to Cart functionality
+        // Enhanced Add to Cart functionality - now integrated with cart system
         document.getElementById('addToCartBtn').addEventListener('click', function() {
             const colour1 = document.getElementById('colour1').value;
             const colour2 = document.getElementById('colour2').value;
@@ -470,35 +470,180 @@
                 return;
             }
 
-            // Create product object
-            const product = {
-                id: 'yin-yang-candle',
+            // Create cart item using the same format as other products
+            const cartItem = {
                 name: 'Yin Yang',
                 price: 7.95,
+                quantity: parseInt(quantity),
                 image: '../pictures/candle7a.jpg',
-                colour1: colour1,
-                colour2: colour2,
+                color: `${colour1} / ${colour2}`,
                 scent: scent,
-                quantity: parseInt(quantity)
+                customization: {
+                    colour1: colour1,
+                    colour2: colour2,
+                    scent: scent
+                }
             };
 
-            // Add to cart (you can integrate with your cart system here)
-            console.log('Adding to cart:', product);
-            
-            // Show success message
-            this.textContent = 'Added to Cart!';
-            this.style.backgroundColor = '#10b981';
-            
-            setTimeout(() => {
-                this.innerHTML = `
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 2.5M7 13l2.5 2.5m6 0L18 18m-3 3h6m-6-3v3m-6-3h6"></path>
-                    </svg>
-                    <span>Add to Cart</span>
-                `;
-                this.style.backgroundColor = '';
-            }, 2000);
+            // Add to cart using the cart manager
+            if (window.cartManager) {
+                const success = window.cartManager.addItem(cartItem);
+                if (success) {
+                    // Show success message
+                    this.textContent = 'Added to Cart!';
+                    this.style.backgroundColor = '#10b981';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = `
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 2.5M7 13l2.5 2.5m6 0L18 18m-3 3h6m-6-3v3m-6-3h6"></path>
+                            </svg>
+                            <span>Add to Cart</span>
+                        `;
+                        this.style.backgroundColor = '';
+                    }, 2000);
+
+                    // Force cart UI update
+                    if (window.cartUI) {
+                        window.cartUI.refresh();
+                        window.cartUI.triggerPageSpecificUpdates();
+                    }
+
+                    // Dispatch custom event for immediate updates
+                    window.dispatchEvent(new CustomEvent('cartItemAdded', { 
+                        detail: { product: cartItem, cart: window.cartManager.getCart() }
+                    }));
+
+                    console.log('Product added to cart successfully:', cartItem.name);
+                } else {
+                    alert('Failed to add item to cart. Please try again.');
+                }
+            } else {
+                alert('Cart system not available. Please refresh the page.');
+            }
         });
+
+        // Review functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            let selectedRating = 0;
+            
+            // Handle star rating
+            const starButtons = document.querySelectorAll('.star-btn');
+            starButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    selectedRating = parseInt(this.getAttribute('data-rating'));
+                    updateStarDisplay();
+                });
+                
+                button.addEventListener('mouseenter', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    highlightStars(rating);
+                });
+            });
+            
+            // Reset stars on mouse leave
+            const ratingStarsElement = document.getElementById('ratingStars');
+            if (ratingStarsElement) {
+                ratingStarsElement.addEventListener('mouseleave', function() {
+                    updateStarDisplay();
+                });
+            }
+            
+            function updateStarDisplay() {
+                starButtons.forEach((button, index) => {
+                    if (index < selectedRating) {
+                        button.classList.remove('text-gray-300');
+                        button.classList.add('text-yellow-400');
+                    } else {
+                        button.classList.remove('text-yellow-400');
+                        button.classList.add('text-gray-300');
+                    }
+                });
+            }
+            
+            function highlightStars(rating) {
+                starButtons.forEach((button, index) => {
+                    if (index < rating) {
+                        button.classList.remove('text-gray-300');
+                        button.classList.add('text-yellow-400');
+                    } else {
+                        button.classList.remove('text-yellow-400');
+                        button.classList.add('text-gray-300');
+                    }
+                });
+            }
+            
+            // Photo upload preview
+            const photoInput = document.getElementById('reviewPhoto');
+            const photoPreview = document.getElementById('photoPreview');
+            
+            if (photoInput && photoPreview) {
+                photoInput.addEventListener('change', function(e) {
+                    photoPreview.innerHTML = '';
+                    const files = Array.from(e.target.files);
+                    
+                    files.forEach((file, index) => {
+                        if (file.type.startsWith('image/')) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const photoContainer = document.createElement('div');
+                                photoContainer.className = 'relative';
+                                photoContainer.innerHTML = `
+                                    <img src="${e.target.result}" alt="Review photo ${index + 1}" class="w-full h-20 object-cover rounded-lg">
+                                    <button type="button" onclick="removePhoto(this)" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600 transition-colors">
+                                        ×
+                                    </button>
+                                `;
+                                photoPreview.appendChild(photoContainer);
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                });
+            }
+            
+            // Review form submission
+            const reviewForm = document.getElementById('reviewForm');
+            if (reviewForm) {
+                reviewForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    if (selectedRating === 0) {
+                        alert('Please select a rating');
+                        return;
+                    }
+                    
+                    const formData = {
+                        rating: selectedRating,
+                        name: document.getElementById('reviewerName').value,
+                        title: document.getElementById('reviewTitle').value,
+                        text: document.getElementById('reviewText').value,
+                        photos: Array.from(photoInput.files)
+                    };
+                    
+                    // Here you would typically send the data to your server
+                    console.log('Review submitted:', formData);
+                    alert('Thank you for your review! It will be published after moderation.');
+                    
+                    // Reset form
+                    this.reset();
+                    selectedRating = 0;
+                    updateStarDisplay();
+                    photoPreview.innerHTML = '';
+                });
+            }
+
+            // Set initial active thumbnail
+            const firstThumbnail = document.querySelector('.thumbnail-image');
+            if (firstThumbnail) {
+                firstThumbnail.classList.add('active');
+            }
+        });
+
+        // Function to remove photo from preview
+        function removePhoto(button) {
+            button.parentElement.remove();
+        }
 
         // Keyboard navigation for image gallery
         document.addEventListener('keydown', function(e) {
@@ -506,15 +651,6 @@
                 navigateImage(-1);
             } else if (e.key === 'ArrowRight') {
                 navigateImage(1);
-            }
-        });
-
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set initial active thumbnail
-            const firstThumbnail = document.querySelector('.thumbnail-image');
-            if (firstThumbnail) {
-                firstThumbnail.classList.add('active');
             }
         });
     </script>

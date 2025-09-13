@@ -11,7 +11,7 @@
     <script src="./js/cart-ui.js"></script>
     <script src="./js/products.js"></script>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="p-4 sm:p-8" style="background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%); min-height: 100vh;">
     <header class="main-header">
         <!-- Logo and Brand -->
         <div class="header-brand">
@@ -23,7 +23,6 @@
             <ul class="flex space-x-6 text-white text-lg">
                 <li><a href="index.html" class="hover:text-gray-300 transition duration-300">Home</a></li>
                 <li><a href="shop.html" class="hover:text-gray-300 transition duration-300">Shop</a></li>
-                <li><a href="about.html" class="hover:text-gray-300 transition duration-300">About Us</a></li>
                 <li><a href="contact.html" class="hover:text-gray-300 transition duration-300">Contact</a></li>
             </ul>
         </nav>
@@ -53,67 +52,119 @@
         </div>
     </header>
 
-    <main class="checkout-main max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-xl" style="margin-top: 8rem; margin-bottom: 2rem;">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-nav max-w-7xl mx-auto px-8 py-4" style="margin-top: 120px;">
+        <ol class="flex items-center space-x-2 text-sm text-gray-600">
+            <li>
+                <a href="index.html" class="hover:text-indigo-600 transition-colors duration-200">Home</a>
+            </li>
+            <li>
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </li>
+            <li>
+                <a href="shop.html" class="hover:text-indigo-600 transition-colors duration-200">Shop</a>
+            </li>
+            <li>
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </li>
+            <li class="font-semibold text-gray-900">Checkout</li>
+        </ol>
+    </nav>
+
+    <main class="max-w-7xl mx-auto bg-white p-8 rounded-xl shadow-2xl border border-gray-100" style="margin-top: 2rem;">
         <div class="checkout-container">
             <!-- Page Title -->
-            <div class="checkout-header">
-                <h2 class="text-3xl font-bold text-gray-800 mb-2">Checkout</h2>
-                <p class="text-gray-600 mb-8">Please fill in your details to complete your order</p>
+            <div class="checkout-header text-center mb-8">
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 leading-tight">Checkout</h2>
+                <p class="text-gray-600 text-lg mb-6 leading-relaxed">Please fill in your details to complete your order</p>
             </div>
 
-            <div class="checkout-content grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="checkout-content grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                 <!-- Customer Information Form -->
-                <div class="customer-info">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Billing Information</h3>
+                <div class="customer-info bg-gradient-to-br from-white to-gray-50 p-6 rounded-xl">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        Billing Information
+                    </h3>
                     
-                    <form id="checkoutForm" class="space-y-4">
-                        <div class="form-row grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="form-group">
-                                <label for="firstName" class="block text-gray-700 text-sm font-semibold mb-2">First Name *</label>
-                                <input type="text" id="firstName" name="firstName" required 
-                                       class="w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                    <form id="checkoutForm" class="space-y-6">
+                        <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                            <div class="form-row grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="form-group">
+                                    <label for="firstName" class="block text-gray-700 text-lg font-semibold mb-2">
+                                        First Name *
+                                    </label>
+                                    <input type="text" id="firstName" name="firstName" required 
+                                           class="block w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                           placeholder="Enter your first name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName" class="block text-gray-700 text-lg font-semibold mb-2">
+                                        Last Name *
+                                    </label>
+                                    <input type="text" id="lastName" name="lastName" required 
+                                           class="block w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                           placeholder="Enter your last name">
+                                </div>
                             </div>
+
                             <div class="form-group">
-                                <label for="lastName" class="block text-gray-700 text-sm font-semibold mb-2">Last Name *</label>
-                                <input type="text" id="lastName" name="lastName" required 
-                                       class="w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                <label for="email" class="block text-gray-700 text-lg font-semibold mb-2">
+                                    Email Address *
+                                </label>
+                                <input type="email" id="email" name="email" required 
+                                       class="block w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                       placeholder="your.email@example.com">
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Email Address *</label>
-                            <input type="email" id="email" name="email" required 
-                                   class="w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone" class="block text-gray-700 text-sm font-semibold mb-2">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone" required 
-                                   class="w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="address" class="block text-gray-700 text-sm font-semibold mb-2">Address *</label>
-                            <input type="text" id="address" name="address" required 
-                                   class="w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                        </div>
-
-                        <div class="form-row grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div class="form-group">
-                                <label for="city" class="block text-gray-700 text-sm font-semibold mb-2">City *</label>
-                                <input type="text" id="city" name="city" required 
-                                       class="w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                <label for="phone" class="block text-gray-700 text-lg font-semibold mb-2">
+                                    Phone Number *
+                                </label>
+                                <input type="tel" id="phone" name="phone" required 
+                                       class="block w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                       placeholder="+1 (555) 123-4567">
                             </div>
+
                             <div class="form-group">
-                                <label for="postalCode" class="block text-gray-700 text-sm font-semibold mb-2">Postal Code *</label>
-                                <input type="text" id="postalCode" name="postalCode" required 
-                                       class="w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                <label for="address" class="block text-gray-700 text-lg font-semibold mb-2">
+                                    Street Address *
+                                </label>
+                                <input type="text" id="address" name="address" required 
+                                       class="block w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                       placeholder="123 Main Street, Apt 4B">
                             </div>
-                            <div class="form-group">
-                                <label for="country" class="block text-gray-700 text-sm font-semibold mb-2">Country *</label>
-                                <select id="country" name="country" required 
-                                        class="w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                                    <option value="">Select Country</option>
+
+                            <div class="form-row grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="form-group">
+                                    <label for="city" class="block text-gray-700 text-lg font-semibold mb-2">
+                                        City *
+                                    </label>
+                                    <input type="text" id="city" name="city" required 
+                                           class="block w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                           placeholder="Enter your city">
+                                </div>
+                                <div class="form-group">
+                                    <label for="postalCode" class="block text-gray-700 text-lg font-semibold mb-2">
+                                        Postal Code *
+                                    </label>
+                                    <input type="text" id="postalCode" name="postalCode" required 
+                                           class="block w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                           placeholder="12345">
+                                </div>
+                                <div class="form-group">
+                                    <label for="country" class="block text-gray-700 text-lg font-semibold mb-2">
+                                        Country *
+                                    </label>
+                                    <select id="country" name="country" required 
+                                            class="block w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                        <option value="">Select your country</option>
                                     <option value="AT">Austria</option>
                                     <option value="BE">Belgium</option>
                                     <option value="BG">Bulgaria</option>
@@ -143,41 +194,126 @@
                                     <option value="SE">Sweden</option>
                                     <option value="US">United States</option>
                                     <option value="CA">Canada</option>
-                                    <option value="GB">United Kingdom</option>
-                                </select>
+                                        <option value="GB">United Kingdom</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Information Section -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                                <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                </svg>
+                                Payment Information
+                            </h4>
+
+                            <div class="form-group">
+                                <label for="cardNumber" class="block text-gray-700 text-lg font-semibold mb-2">
+                                    Card Number *
+                                </label>
+                                <input type="text" id="cardNumber" name="cardNumber" required 
+                                       class="block w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                       placeholder="1234 5678 9012 3456"
+                                       maxlength="19"
+                                       oninput="formatCardNumber(this)">
+                                <div class="mt-2 flex space-x-2">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="h-6 w-auto">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="h-6 w-auto">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="American Express" class="h-6 w-auto">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cardName" class="block text-gray-700 text-lg font-semibold mb-2">
+                                    Cardholder Name *
+                                </label>
+                                <input type="text" id="cardName" name="cardName" required 
+                                       class="block w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                       placeholder="John Doe">
+                            </div>
+
+                            <div class="form-row grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="form-group">
+                                    <label for="expiryDate" class="block text-gray-700 text-lg font-semibold mb-2">
+                                        Expiry Date *
+                                    </label>
+                                    <input type="text" id="expiryDate" name="expiryDate" required 
+                                           class="block w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                           placeholder="MM/YY"
+                                           maxlength="5"
+                                           oninput="formatExpiryDate(this)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv" class="block text-gray-700 text-lg font-semibold mb-2">
+                                        CVV *
+                                    </label>
+                                    <input type="text" id="cvv" name="cvv" required 
+                                           class="block w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                           placeholder="123"
+                                           maxlength="4"
+                                           oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+                            </div>
+
+                            <div class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                    </svg>
+                                    <div>
+                                        <p class="text-sm text-blue-800 font-medium">Secure Payment</p>
+                                        <p class="text-xs text-blue-600 mt-1">Your payment information is encrypted and secure. We use industry-standard SSL encryption to protect your data.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
-                </div>
-
-                <!-- Order Summary -->
-                <div class="order-summary">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Order Summary</h3>
+                </div>                <!-- Order Summary -->
+                <div class="order-summary bg-gradient-to-br from-white to-gray-50 p-6 rounded-xl">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                        Order Summary
+                    </h3>
                     
-                    <div class="order-items bg-gray-50 rounded-lg p-4 mb-4">
+                    <div class="order-items bg-white rounded-lg border border-gray-200 shadow-sm p-4 mb-6">
                         <div id="checkoutItems" class="space-y-3">
                             <!-- Items will be loaded here -->
                         </div>
+                        <div id="emptyCartNotice" class="hidden text-center py-8 text-gray-500">
+                            <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                            <p class="text-lg font-medium">Your cart is empty</p>
+                            <p class="text-sm mt-2">Add some beautiful candles to get started</p>
+                            <a href="shop.html" class="inline-block mt-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition duration-300">Browse Candles</a>
+                        </div>
                     </div>
 
-                    <div class="order-totals space-y-2 mb-6">
-                        <div class="flex justify-between text-gray-600">
+                    <div class="order-totals bg-indigo-50 rounded-lg border border-indigo-100 p-4 mb-6">
+                        <div class="flex justify-between text-gray-600 mb-2">
                             <span>Subtotal:</span>
                             <span id="subtotal">€0.00</span>
                         </div>
-                        <div class="flex justify-between text-gray-600">
+                        <div class="flex justify-between text-gray-600 mb-2">
                             <span>Shipping:</span>
                             <span id="shipping">€3.99</span>
                         </div>
-                        <div class="border-t pt-2 flex justify-between text-lg font-semibold text-gray-800">
+                        <div class="border-t border-indigo-200 pt-2 flex justify-between text-xl font-bold text-indigo-700">
                             <span>Total:</span>
                             <span id="finalTotal">€3.99</span>
                         </div>
                     </div>
 
                     <button id="purchaseBtn" type="submit" form="checkoutForm" 
-                            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
-                        Complete Purchase
+                            class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl text-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                        </svg>
+                        <span>Complete Purchase</span>
                     </button>
 
                     <p class="text-xs text-gray-500 mt-3 text-center">
