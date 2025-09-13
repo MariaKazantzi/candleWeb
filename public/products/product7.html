@@ -56,7 +56,7 @@
     <main class="product-main max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         <div class="product-image-gallery">
             <div class="relative">
-                <img id="mainImage" src="../pictures/candle4a.jpg" alt="Main Product Image" class="main-product-image mb-4">
+                <img id="mainImage" src="../pictures/candle7a.jpg" alt="Main Product Image" class="main-product-image mb-4">
                 
                 <!-- Navigation Arrows -->
                 <button id="prevBtn" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all duration-200" onclick="navigateImage(-1)">
@@ -73,9 +73,10 @@
             </div>
 
             <div class="flex flex-wrap gap-3 justify-center">
-                <img src="../pictures/candle4a.jpg" alt="Product Thumbnail 1" class="thumbnail-image active" onclick="changeMainImage(this)" data-index="0">
-                <img src="../pictures/candle4b.jpg" alt="Product Thumbnail 2" class="thumbnail-image" onclick="changeMainImage(this)" data-index="1">
-                <img src="../pictures/candle4c.jpg" alt="Product Thumbnail 3" class="thumbnail-image" onclick="changeMainImage(this)" data-index="2">
+                <img src="../pictures/candle7a.jpg" alt="Product Thumbnail 1" class="thumbnail-image active" onclick="changeMainImage(this)" data-index="0">
+                <img src="../pictures/candle7b.jpg" alt="Product Thumbnail 2" class="thumbnail-image" onclick="changeMainImage(this)" data-index="1">
+                <img src="../pictures/candle7c.jpg" alt="Product Thumbnail 3" class="thumbnail-image" onclick="changeMainImage(this)" data-index="2">
+                <img src="../pictures/candle7d.jpg" alt="Product Thumbnail 4" class="thumbnail-image" onclick="changeMainImage(this)" data-index="3">
             </div>
         </div>
 
@@ -95,17 +96,17 @@
             <div class="mb-6">
                 <label for="color" class="block text-gray-700 text-lg font-semibold mb-2">Color:</label>
                 <select id="color" class="block w-full border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                    <option value="black">Black</option>
-                    <option value="white">White</option>
-                    <option value="grey">Grey</option>
-                    <option value="red">Red</option>
-                    <option value="blue">Blue</option>
-                    <option value="green">Green</option>
                     <option value="yellow">Yellow</option>
                     <option value="orange">Orange</option>
-                    <option value="purple">Purple</option>
+                    <option value="red">Red</option>
                     <option value="pink">Pink</option>
+                    <option value="purple">Purple</option>
+                    <option value="blue">Blue</option>
+                    <option value="lightblue">Light Blue</option>
+                    <option value="green">Green</option>
+                    <option value="lightgreen">Light Green</option>
                     <option value="brown">Brown</option>
+                    <option value="black">Black</option>
                 </select>
             </div>
 
@@ -135,9 +136,10 @@
     <script>
         // Image list for navigation
         const imageList = [
-            '../pictures/candle4a.jpg',
-            '../pictures/candle4b.jpg',
-            '../pictures/candle4c.jpg'
+            '../pictures/candle7a.jpg',
+            '../pictures/candle7b.jpg',
+            '../pictures/candle7c.jpg',
+            '../pictures/candle7d.jpg'
         ];
 
         let currentImageIndex = 0;
