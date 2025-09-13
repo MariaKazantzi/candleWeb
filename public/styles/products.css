@@ -1,8 +1,17 @@
 /* Product page specific styles */
 
+/* Breadcrumb navigation */
+.breadcrumb-nav {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 /* Product main content spacing */
 .product-main {
     margin-top: 160px; /* Account for fixed header */
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Shop title and description within the header */
@@ -14,28 +23,161 @@
 /* Specific styles for the product image gallery */
 .main-product-image {
     width: 100%;
-    height: 400px; /* Fixed height for consistency, adjust as needed */
+    height: 450px; /* Increased height for better viewing */
     object-fit: contain; /* Ensures the whole image is visible */
-    border-radius: 0.75rem; /* rounded-xl */
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* subtle shadow */
+    border-radius: 1rem; /* More rounded corners */
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+    transition: all 0.3s ease-in-out;
+}
+
+.main-product-image:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
 }
 
 .thumbnail-image {
-    width: 100px; /* Fixed width for thumbnails */
-    height: 100px; /* Fixed height for thumbnails */
-    object-fit: cover; /* Cover the area, cropping if necessary */
-    border-radius: 0.5rem; /* rounded-lg */
+    width: 80px; /* Slightly smaller thumbnails */
+    height: 80px; 
+    object-fit: cover; 
+    border-radius: 0.75rem; /* More rounded */
     cursor: pointer;
-    transition: transform 0.2s ease-in-out, border 0.2s ease-in-out;
-    border: 2px solid transparent; /* Default transparent border */
+    transition: all 0.3s ease-in-out;
+    border: 3px solid transparent; 
+    position: relative;
+    overflow: hidden;
+}
+
+.thumbnail-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .thumbnail-image:hover {
-    transform: translateY(-3px); /* Slight lift on hover */
-    border-color: #6366f1; /* Border on hover */
+    border-color: #6366f1; 
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+.thumbnail-image:hover::before {
+    opacity: 1;
 }
 
 .thumbnail-image.active {
-    border-color: #6366f1; /* Active state border */
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5); /* Blue glow for active */
+    border-color: #6366f1; 
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3); /* Enhanced active glow */
+}
+
+/* Enhanced button animations */
+button {
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: all 0.6s ease;
+    transform: translate(-50%, -50%);
+}
+
+button:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Responsive enhancements */
+@media (max-width: 768px) {
+    .product-main {
+        margin-top: 140px;
+        padding: 1rem;
+        gap: 2rem;
+    }
+    
+    .main-product-image {
+        height: 300px;
+    }
+    
+    .thumbnail-image {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Loading animation for images - DISABLED to prevent wiggling */
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Add subtle parallax effect - DISABLED to prevent wiggling */
+
+/* Enhanced focus states for accessibility */
+select:focus,
+input:focus,
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+    border-color: #6366f1;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Navigation arrows for image gallery */
+#prevArrow, #nextArrow {
+    position: absolute;
+    z-index: 20;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.7) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#prevArrow:hover, #nextArrow:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Make sure arrows are visible on the image container */
+.product-image-gallery .relative {
+    position: relative;
+}
+
+#prevArrow {
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#nextArrow {
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
 }
