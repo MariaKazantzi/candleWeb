@@ -22,13 +22,13 @@ class CartManager {
         try {
             const cartData = localStorage.getItem(this.storageKey);
             const cart = cartData ? JSON.parse(cartData) : [];
-            console.log('Cart loaded from localStorage:', cart);
+            //console.log('Cart loaded from localStorage:', cart);
             
             // Fix any decimal IDs to integers for consistency
             cart.forEach(item => {
                 if (typeof item.id === 'number' && item.id % 1 !== 0) {
                     item.id = Math.floor(item.id);
-                    console.log('Fixed decimal ID to integer:', item.id);
+                    //console.log('Fixed decimal ID to integer:', item.id);
                 }
             });
             
@@ -42,7 +42,7 @@ class CartManager {
     saveCart() {
         try {
             localStorage.setItem(this.storageKey, JSON.stringify(this.cart));
-            console.log('Cart saved to localStorage:', this.cart);
+            //console.log('Cart saved to localStorage:', this.cart);
             
             // Dispatch event for components listening to cart changes
             window.dispatchEvent(new CustomEvent('cartUpdated', { 
@@ -111,8 +111,8 @@ class CartManager {
     }
     
     increaseQuantity(itemId) {
-        console.log('CartManager: increaseQuantity called for item:', itemId);
-        console.log('CartManager: Current cart items and their IDs:', this.cart.map(item => ({ id: item.id, name: item.name })));
+        //console.log('CartManager: increaseQuantity called for item:', itemId);
+        //console.log('CartManager: Current cart items and their IDs:', this.cart.map(item => ({ id: item.id, name: item.name })));
         
         // Ensure itemId is an integer for comparison
         const targetId = parseInt(itemId);
@@ -120,17 +120,17 @@ class CartManager {
         
         if (itemIndex !== -1) {
             this.cart[itemIndex].quantity += 1;
-            console.log('CartManager: Increased quantity to:', this.cart[itemIndex].quantity);
+            //console.log('CartManager: Increased quantity to:', this.cart[itemIndex].quantity);
             this.saveCart();
             return true;
         }
-        console.log('CartManager: Item not found:', itemId, 'Target ID:', targetId);
+        //console.log('CartManager: Item not found:', itemId, 'Target ID:', targetId);
         return false;
     }
     
     decreaseQuantity(itemId) {
-        console.log('CartManager: decreaseQuantity called for item:', itemId);
-        console.log('CartManager: Current cart items and their IDs:', this.cart.map(item => ({ id: item.id, name: item.name })));
+        //console.log('CartManager: decreaseQuantity called for item:', itemId);
+        //console.log('CartManager: Current cart items and their IDs:', this.cart.map(item => ({ id: item.id, name: item.name })));
         
         // Ensure itemId is an integer for comparison
         const targetId = parseInt(itemId);
@@ -138,11 +138,11 @@ class CartManager {
         
         if (itemIndex !== -1 && this.cart[itemIndex].quantity > 1) {
             this.cart[itemIndex].quantity -= 1;
-            console.log('CartManager: Decreased quantity to:', this.cart[itemIndex].quantity);
+            //console.log('CartManager: Decreased quantity to:', this.cart[itemIndex].quantity);
             this.saveCart();
             return true;
         }
-        console.log('CartManager: Cannot decrease - item not found or quantity is 1:', itemId, 'Target ID:', targetId, itemIndex !== -1 ? this.cart[itemIndex].quantity : 'not found');
+        //console.log('CartManager: Cannot decrease - item not found or quantity is 1:', itemId, 'Target ID:', targetId, itemIndex !== -1 ? this.cart[itemIndex].quantity : 'not found');
         return false;
     }
     
@@ -153,7 +153,7 @@ class CartManager {
     
     // Method to reset cart if there are ID issues
     resetCart() {
-        console.log('Resetting cart due to ID issues...');
+        //console.log('Resetting cart due to ID issues...');
         localStorage.removeItem(this.storageKey);
         this.cart = [];
         this.saveCart();
@@ -181,6 +181,7 @@ class CartManager {
     
     // Debug method
     debugCart() {
+        return;
         console.log('Current cart state:', {
             items: this.cart,
             totalItems: this.getTotalItems(),

@@ -497,7 +497,7 @@ function getCurrentProductData() {
 
 // Initialize page-specific functionality
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Products page loaded');
+    //console.log('Products page loaded');
     
     // Only initialize sorting on shop page
     if (window.location.pathname.includes('shop.html') || window.location.pathname.endsWith('/')) {
@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Set up sort dropdown handler
         handleSortChange();
         
-        console.log('Shop page sorting initialized');
+        //console.log('Shop page sorting initialized');
     }
     
     // Initialize Add to Cart functionality on product pages
@@ -516,7 +516,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentProduct = getCurrentProductData();
         if (currentProduct) {
             initializeAddToCart(currentProduct);
-            console.log('Add to Cart initialized for:', currentProduct.name);
+            //console.log('Add to Cart initialized for:', currentProduct.name);
         }
     }
 });

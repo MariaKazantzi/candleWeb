@@ -28,8 +28,8 @@ class CartUI {
         }
         
         this.cart = window.cartManager.getCart();
-        console.log('CartUI initialized, cart items:', this.cart.length);
-        console.log('CartUI initialized, cart contents:', this.cart);
+        //console.log('CartUI initialized, cart items:', this.cart.length);
+        //console.log('CartUI initialized, cart contents:', this.cart);
         
         // Immediately update display with current cart
         this.updateCartDisplay();
@@ -119,7 +119,7 @@ class CartUI {
             const freshCart = window.cartManager.loadCart();
             window.cartManager.cart = freshCart;
             this.cart = freshCart;
-            console.log('Forced cart refresh, items found:', this.cart.length);
+            //console.log('Forced cart refresh, items found:', this.cart.length);
             this.updateCartDisplay();
             this.triggerPageSpecificUpdates();
         }
@@ -163,8 +163,8 @@ class CartUI {
     }
     
     updateCartDisplay() {
-        console.log('Updating cart display, cart items:', this.cart.length);
-        console.log('Cart contents:', this.cart);
+        //console.log('Updating cart display, cart items:', this.cart.length);
+        //console.log('Cart contents:', this.cart);
         
         const cartCount = document.getElementById('cartCount');
         const cartItems = document.getElementById('cartItems');
@@ -182,7 +182,7 @@ class CartUI {
         cartCount.textContent = totalItems;
         cartCount.style.display = totalItems > 0 ? 'flex' : 'flex'; // Always show for consistency
         
-        console.log('Updated cart count to:', totalItems);
+        //console.log('Updated cart count to:', totalItems);
         
         // Add visual indication if cart has items
         const cartButton = document.getElementById('cartButton');
@@ -239,7 +239,7 @@ class CartUI {
                 const itemIdStr = button.getAttribute('data-item-id');
                 const itemId = parseInt(itemIdStr);
                 const action = button.getAttribute('data-action');
-                console.log('CartUI: Button clicked - raw ID:', itemIdStr, 'parsed ID:', itemId, 'action:', action);
+                //console.log('CartUI: Button clicked - raw ID:', itemIdStr, 'parsed ID:', itemId, 'action:', action);
                 this.updateQuantity(itemId, action);
             });
         });
@@ -291,7 +291,7 @@ class CartUI {
         
         // Use the global cart manager to add the item
         if (window.cartManager) {
-            console.log('CartUI: Adding item to cart:', product);
+            //console.log('CartUI: Adding item to cart:', product);
             window.cartManager.addItem(product);
             this.cart = window.cartManager.getCart();
             this.updateCartDisplay();
@@ -307,7 +307,7 @@ class CartUI {
             // Show success feedback
             this.showAddToCartFeedback();
             
-            console.log('CartUI: Item added, new cart size:', this.cart.length);
+            //console.log('CartUI: Item added, new cart size:', this.cart.length);
         } else {
             console.error('Global cart manager not available');
         }
@@ -319,7 +319,7 @@ class CartUI {
             return;
         }
 
-        console.log('CartUI: Removing item with ID:', itemId);
+        //console.log('CartUI: Removing item with ID:', itemId);
         window.cartManager.removeItem(itemId);
         this.cart = window.cartManager.getCart();
         
@@ -342,11 +342,11 @@ class CartUI {
             dropdown.classList.remove('hidden');
         }
         
-        console.log('CartUI: Item removed, new cart size:', this.cart.length);
+        //console.log('CartUI: Item removed, new cart size:', this.cart.length);
     }
     
     updateQuantity(itemId, action) {
-        console.log('CartUI: updateQuantity called with:', itemId, action);
+        //console.log('CartUI: updateQuantity called with:', itemId, action);
         
         if (!window.cartManager) {
             console.error('Global cart manager not available');
@@ -382,7 +382,7 @@ class CartUI {
             dropdown.classList.remove('hidden');
         }
         
-        console.log('CartUI: Quantity updated, new cart:', this.cart.map(item => `${item.name}: ${item.quantity}`));
+        //console.log('CartUI: Quantity updated, new cart:', this.cart.map(item => `${item.name}: ${item.quantity}`));
     }
     
     toggleCart() {
@@ -504,9 +504,9 @@ class CartUI {
             
             // Only update if cart has actually changed
             if (currentCartString !== freshCartString) {
-                console.log('Cart changed detected, updating from storage');
-                console.log('Old cart:', this.cart);
-                console.log('New cart:', freshCart);
+                //console.log('Cart changed detected, updating from storage');
+                //console.log('Old cart:', this.cart);
+                //console.log('New cart:', freshCart);
                 
                 window.cartManager.cart = freshCart;
                 this.cart = freshCart;
@@ -518,11 +518,11 @@ class CartUI {
     
     // Debug function - can be called from browser console with window.cartUI.debugCart()
     debugCart() {
-        console.log('=== CART DEBUG INFO ===');
-        console.log('Cart instance exists:', !!window.cartUI);
-        console.log('Cart array length:', this.cart.length);
-        console.log('Cart contents:', JSON.stringify(this.cart, null, 2));
-        console.log('localStorage cart:', localStorage.getItem('cart'));
+        //console.log('=== CART DEBUG INFO ===');
+        //console.log('Cart instance exists:', !!window.cartUI);
+        //console.log('Cart array length:', this.cart.length);
+        //console.log('Cart contents:', JSON.stringify(this.cart, null, 2));
+        //console.log('localStorage cart:', localStorage.getItem('cart'));
         
         const cartElements = {
             cartCount: document.getElementById('cartCount'),
@@ -531,15 +531,15 @@ class CartUI {
             cartButton: document.getElementById('cartButton')
         };
         
-        console.log('Cart elements found:', Object.keys(cartElements).filter(key => cartElements[key]));
-        console.log('Cart elements missing:', Object.keys(cartElements).filter(key => !cartElements[key]));
+        //console.log('Cart elements found:', Object.keys(cartElements).filter(key => cartElements[key]));
+        //console.log('Cart elements missing:', Object.keys(cartElements).filter(key => !cartElements[key]));
         
         if (cartElements.cartCount) {
-            console.log('cartCount text content:', cartElements.cartCount.textContent);
-            console.log('cartCount display style:', cartElements.cartCount.style.display);
+            //console.log('cartCount text content:', cartElements.cartCount.textContent);
+            //console.log('cartCount display style:', cartElements.cartCount.style.display);
         }
         
-        console.log('=== END DEBUG INFO ===');
+        //console.log('=== END DEBUG INFO ===');
         
         return {
             cart: this.cart,
@@ -559,23 +559,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Also initialize on window load as fallback
 window.addEventListener('load', function() {
-    console.log('Window load event fired');
+    //console.log('Window load event fired');
     
     if (!window.cartUI) {
-        console.log('Creating new CartUI instance on window load');
+        //console.log('Creating new CartUI instance on window load');
         window.cartUI = new CartUI();
     } else if (window.cartUI && !window.cartUI.isInitialized) {
-        console.log('Re-initializing existing CartUI');
+        //console.log('Re-initializing existing CartUI');
         window.cartUI.initWhenReady();
     } else if (window.cartUI && window.cartUI.isInitialized) {
-        console.log('Forcing cart refresh on page load');
+        //console.log('Forcing cart refresh on page load');
         window.cartUI.forceCartRefresh();
     }
 });
 
 // Add a pageshow event listener for better navigation handling
 window.addEventListener('pageshow', function(event) {
-    console.log('Pageshow event fired, persisted:', event.persisted);
+    //console.log('Pageshow event fired, persisted:', event.persisted);
     
     if (window.cartUI && window.cartUI.isInitialized) {
         // Force refresh when page is shown (including back/forward navigation)
