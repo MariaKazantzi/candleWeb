@@ -27,7 +27,7 @@ const productsData = [
     {
         id: 3,
         name: 'Sea Shell',
-        category: 'Ocean Collection',
+        category: 'Decorative Collection',
         description: 'Beautiful seashell-inspired candle',
         price: 3.95,
         image: 'pictures/candle3.png',
@@ -60,7 +60,7 @@ const productsData = [
     {
         id: 6,
         name: 'Big Heart Cube',
-        category: 'Love Collection',
+        category: 'Geometric Collection',
         description: 'Romantic heart-shaped candle cube',
         price: 5.95,
         image: 'pictures/candle6.png',
@@ -71,7 +71,7 @@ const productsData = [
     {
         id: 7,
         name: 'Yin Yang',
-        category: 'Zen Collection',
+        category: 'Geometric Collection',
         description: 'Balanced harmony in candle form',
         price: 7.95,
         image: 'pictures/candle7.png',
@@ -85,7 +85,6 @@ const productsData = [
         category: 'Special Offers',
         description: 'Surprise collection of assorted candles',
         price: 15.95,
-        originalPrice: 20.00,
         image: 'pictures/candle8.png',
         link: 'products/product8.html',
         dateAdded: new Date('2025-09-06'),
