@@ -110,6 +110,81 @@
                 <img src="../pictures/candle1g.jpg" alt="Product Thumbnail 7" class="thumbnail-image" onclick="changeMainImage(this)" data-index="6">
                 <img src="../pictures/candle1h.jpg" alt="Product Thumbnail 8" class="thumbnail-image" onclick="changeMainImage(this)" data-index="7">
             </div>
+            
+            <!-- Customer Reviews Section -->
+            <div class="bg-white rounded-lg shadow-sm p-4 mt-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">Reviews</h3>
+                <div class="flex items-center mb-3">
+                    <div class="flex text-gray-300 mr-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-sm text-gray-500">(0 reviews)</span>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <h4 class="text-sm font-semibold text-gray-800 mb-3">Write a Review</h4>
+                    <form id="reviewForm" class="space-y-3">
+                        <!-- Rating -->
+                        <div>
+                            <label class="block text-gray-700 text-xs font-medium mb-1">Rating</label>
+                            <div class="flex space-x-1" id="ratingStars">
+                                <button type="button" class="star-btn text-gray-300 hover:text-yellow-400 transition-colors duration-200" data-rating="1">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                </button>
+                                <button type="button" class="star-btn text-gray-300 hover:text-yellow-400 transition-colors duration-200" data-rating="2">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                </button>
+                                <button type="button" class="star-btn text-gray-300 hover:text-yellow-400 transition-colors duration-200" data-rating="3">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                </button>
+                                <button type="button" class="star-btn text-gray-300 hover:text-yellow-400 transition-colors duration-200" data-rating="4">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                </button>
+                                <button type="button" class="star-btn text-gray-300 hover:text-yellow-400 transition-colors duration-200" data-rating="5">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Review Text -->
+                        <div>
+                            <label for="reviewText" class="block text-gray-700 text-xs font-medium mb-1">Your Review</label>
+                            <textarea id="reviewText" rows="3" class="w-full border border-gray-300 rounded py-2 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Share your experience with this product..." required></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div>
+                            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded text-sm transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                Submit Review
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <div class="product-details bg-gradient-to-br from-white to-gray-50 p-6 rounded-xl">
@@ -278,119 +353,6 @@
 
     <!-- Trust indicators and additional information -->
     <section class="max-w-7xl mx-auto mt-12 px-8">
-
-        <!-- Customer reviews section -->
-        <div class="bg-white rounded-xl shadow-lg p-8">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6">Customer Reviews</h3>
-            <div class="flex items-center mb-6">
-                <div class="flex text-gray-300 mr-3">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                </div>
-                <span class="text-gray-600">No reviews yet (0 reviews)</span>
-            </div>
-            
-            <!-- No reviews message -->
-            <div class="text-center py-8 border-2 border-dashed border-gray-200 rounded-lg mb-6">
-                <svg class="w-12 h-12 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                </svg>
-                <p class="text-gray-500 text-lg mb-2">No reviews yet</p>
-                <p class="text-gray-400 text-sm">Be the first to share your experience with this product!</p>
-            </div>
-
-            <!-- Add Review Form -->
-            <div class="bg-gray-50 rounded-lg p-6">
-                <h4 class="text-lg font-semibold text-gray-800 mb-4">Write a Review</h4>
-                <form id="reviewForm" class="space-y-4">
-                    <!-- Rating -->
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Rating</label>
-                        <div class="flex space-x-1" id="ratingStars">
-                            <button type="button" class="star-btn text-gray-300 hover:text-yellow-400 transition-colors duration-200" data-rating="1">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                </svg>
-                            </button>
-                            <button type="button" class="star-btn text-gray-300 hover:text-yellow-400 transition-colors duration-200" data-rating="2">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                </svg>
-                            </button>
-                            <button type="button" class="star-btn text-gray-300 hover:text-yellow-400 transition-colors duration-200" data-rating="3">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                </svg>
-                            </button>
-                            <button type="button" class="star-btn text-gray-300 hover:text-yellow-400 transition-colors duration-200" data-rating="4">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                </svg>
-                            </button>
-                            <button type="button" class="star-btn text-gray-300 hover:text-yellow-400 transition-colors duration-200" data-rating="5">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Name -->
-                    <div>
-                        <label for="reviewerName" class="block text-gray-700 font-medium mb-2">Your Name</label>
-                        <input type="text" id="reviewerName" class="w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter your name" required>
-                    </div>
-
-                    <!-- Review Title -->
-                    <div>
-                        <label for="reviewTitle" class="block text-gray-700 font-medium mb-2">Review Title</label>
-                        <input type="text" id="reviewTitle" class="w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Give your review a title" required>
-                    </div>
-
-                    <!-- Review Text -->
-                    <div>
-                        <label for="reviewText" class="block text-gray-700 font-medium mb-2">Your Review</label>
-                        <textarea id="reviewText" rows="4" class="w-full border-2 border-gray-300 rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Share your experience with this product..." required></textarea>
-                    </div>
-
-                    <!-- Photo Upload -->
-                    <div>
-                        <label for="reviewPhoto" class="block text-gray-700 font-medium mb-2">Add Photos (Optional)</label>
-                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-400 transition-colors duration-200">
-                            <input type="file" id="reviewPhoto" accept="image/*" multiple class="hidden">
-                            <label for="reviewPhoto" class="cursor-pointer">
-                                <svg class="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                                <p class="text-gray-500 mb-1">Click to upload photos</p>
-                                <p class="text-gray-400 text-sm">PNG, JPG up to 5MB each</p>
-                            </label>
-                        </div>
-                        <div id="photoPreview" class="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2"></div>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="pt-4">
-                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
-                            Submit Review
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </section>
 
 
@@ -500,33 +462,6 @@
                 });
             }
             
-            // Photo upload preview
-            const photoInput = document.getElementById('reviewPhoto');
-            const photoPreview = document.getElementById('photoPreview');
-            
-            photoInput.addEventListener('change', function(e) {
-                photoPreview.innerHTML = '';
-                const files = Array.from(e.target.files);
-                
-                files.forEach((file, index) => {
-                    if (file.type.startsWith('image/')) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const photoContainer = document.createElement('div');
-                            photoContainer.className = 'relative';
-                            photoContainer.innerHTML = `
-                                <img src="${e.target.result}" alt="Review photo ${index + 1}" class="w-full h-20 object-cover rounded-lg">
-                                <button type="button" onclick="removePhoto(this)" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600 transition-colors">
-                                    ×
-                                </button>
-                            `;
-                            photoPreview.appendChild(photoContainer);
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            });
-            
             // Review form submission
             document.getElementById('reviewForm').addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -536,30 +471,27 @@
                     return;
                 }
                 
+                const reviewText = document.getElementById('reviewText').value;
+                if (!reviewText.trim()) {
+                    alert('Please write a review');
+                    return;
+                }
+                
                 const formData = {
                     rating: selectedRating,
-                    name: document.getElementById('reviewerName').value,
-                    title: document.getElementById('reviewTitle').value,
-                    text: document.getElementById('reviewText').value,
-                    photos: Array.from(photoInput.files)
+                    text: reviewText
                 };
                 
                 // Here you would typically send the data to your server
                 console.log('Review submitted:', formData);
-                alert('Thank you for your review! It will be published after moderation.');
+                alert('Thank you for your review! It has been submitted.');
                 
                 // Reset form
                 this.reset();
                 selectedRating = 0;
                 updateStarDisplay();
-                photoPreview.innerHTML = '';
             });
         });
-        
-        // Function to remove photo from preview
-        function removePhoto(button) {
-            button.parentElement.remove();
-        }
         
         // Optional: Add keyboard navigation
         document.addEventListener('keydown', function(event) {
