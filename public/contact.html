@@ -69,7 +69,7 @@
                 <!-- Contact Form -->
                 <div class="contact-form-section">
                     <h2 class="form-title">Send us a Message</h2>
-                    <form class="contact-form" action="#" method="POST">
+                    <form class="contact-form" action="send_contact_email.php" method="POST">
                         <div class="form-group">
                             <label for="name" class="form-label">Full Name *</label>
                             <input type="text" id="name" name="name" class="form-input" required>
@@ -179,38 +179,6 @@
         </div>
     </main>
 
-    <script>
-        // Contact form handling
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const subject = formData.get('subject');
-            const message = formData.get('message');
-            
-            // Basic validation
-            if (!name || !email || !subject || !message) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Simulate form submission
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = 'Sending...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                alert('Thank you for your message! We\'ll get back to you soon.');
-                this.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        });
-    </script>
+    <script src="./js/contact.js"></script>
 </body>
 </html>
